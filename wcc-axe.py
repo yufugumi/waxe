@@ -2,11 +2,17 @@ import csv
 from playwright.sync_api import sync_playwright
 from axe_core_python.sync_playwright import Axe
 from tqdm import tqdm
+from datetime import datetime
 
 axe = Axe()
 
+# Get current date
+now = datetime.now()
+date_string = now.strftime("%%d-%m-%Y")
+
 # Open the CSV file for writing
-with open('results.csv', mode='w', newline='') as file:
+filename = f'accessibility-report-wellington-website-{date_string}.csv'
+with open(filename, 'w', newline='') as file:
     writer = csv.writer(file)
     writer.writerow(["URL", "Violations"])
 
