@@ -1,7 +1,6 @@
 name: Monthly axe core scan
 
 on:
-  push:
   schedule:
     - cron: '0 0 1 * *'  # This runs the script at 00:00 on the 1st of every month
 
