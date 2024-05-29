@@ -1,0 +1,10 @@
+datetime
+requests
+axe-core-python 
+selenium 
+playwright
+textstat
+beautifulsoup4
+tqdm
+trafilatura
+asyncio
