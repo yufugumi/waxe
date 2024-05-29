@@ -29,7 +29,8 @@ jobs:
     - name: Install Python dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install trafilatura playwright tqdm axe-core-python
+        pip install trafilatura playwright tqdm
+        pip install -U axe-core-python
 
     - name: Install Playwright dependencies
       run: |
