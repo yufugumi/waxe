@@ -11,10 +11,10 @@ now = datetime.now()
 date_string = now.strftime("%%d-%m-%Y")
 
 # Open the CSV file for writing
-filename = f'accessibility-report-wellington-website-{date_string}.csv'
+filename = f'accessibility-report-wellington.csv'
 with open(filename, 'w', newline='') as file:
     writer = csv.writer(file)
-    writer.writerow(["URL", "Violations"])
+    writer.writerow(["URL", "Violations", "Status of issue", "Comment"])
 
     # Read the URLs from the file
     with open('urls.txt', 'r') as url_file:
