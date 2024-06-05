@@ -42,6 +42,7 @@ jobs:
 
     - name: Run Python script
       run: python wcc-axe.py
+      timeout-minutes: 420
 
     - name: Commit changes
       run: |
