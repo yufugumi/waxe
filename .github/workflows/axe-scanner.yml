@@ -1,6 +1,7 @@
 name: Monthly axe core scan
 
 on:
+  push:
   schedule:
     - cron: '0 0 1 * *'  # This runs the script at 00:00 on the 1st of every month, might change frequency in the future
 
@@ -51,3 +52,21 @@ jobs:
         git add *
         git commit -m "New a11y report for wellington.govt.nz" || echo "No changes to commit"
         git push
+
+    - name: Generate tag version
+      id: tag_version
+      run: echo ::set-output name=new_tag::$(date +'v%Y-%m-%d')
+
+    - name: Generate release notes
+      run: |
+        echo "This release contains the Axe monthly accessibility report for wellington.govt.nz generated on $(date +'%Y-%m-%d')" > release_notes.md
+
+    - name: Create a new release
+      if: success() # Only create a release if the previous steps were successful
+      uses: ncipollo/release-action@v1
+      with:
+        tag: ${{ steps.tag_version.outputs.new_tag }}
+        name: Monthly accessibility report for wellington.govt.nz
+        body: release_notes.md
+        artifacts: "*.csv"
+        allowUpdates: true
