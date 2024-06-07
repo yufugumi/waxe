@@ -28,37 +28,39 @@ const Hero = () => {
   return (
     <Section className="relative backdrop-blur-sm">
       <Container className="flex flex-col gap-8 rounded-md border bg-muted/50 p-4">
-        <Badge className="not-prose w-fit hover:bg-sky-100" variant="outline">
-          <Link
-            className="group flex items-center gap-1"
-            href="https://github.com/et0and/wellington.govt.nz-axe/releases/latest"
-          >
-            See the latest report
-            <ArrowRight className="w-4 transition-all group-hover:-rotate-45" />
-          </Link>
-        </Badge>
         <h1 className="text-2xl font-medium">
           Wellington.govt.nz accessibility reports
         </h1>
+
         <p>
           Download and track changes for accessibility issues picked up by Axe.
-        </p>
-        <p>
+        <br/>
+        
           Currently, the website has <strong>{issueCount}</strong> issues.
         </p>
 
         <div className="flex gap-4">
-          <Button className="hover:bg-blue-600">
-            <Link href="https://github.com/et0and/wellington.govt.nz-axe/releases/latest">
-              Open latest
-            </Link>
-          </Button>
-          <Button variant="outline" className="hover:bg-sky-100">
-            <Link href="https://github.com/et0and/wellington.govt.nz-axe/releases">
-              Past reports
-            </Link>
-          </Button>
+          <Link
+            href="https://github.com/et0and/wellington.govt.nz-axe/releases/latest"
+            className="inline-block px-4 py-2 bg-black text-white rounded-lg hover:bg-blue-600 focus:outline-double focus:outline-4"
+          >
+            Open latest
+          </Link>
+          <Link
+            href="https://github.com/et0and/wellington.govt.nz-axe/releases"
+            className="inline-block px-4 py-2 border border-gray-200 bg-gray-100 border-current text-current rounded-lg focus:outline-double focus:outline-4 hover:bg-sky-100"
+          >
+            Past reports
+          </Link>
         </div>
+        <Badge
+          className="focus:outline-double not-prose w-fit"
+          variant="outline"
+        >
+          <p className="group flex items-center gap-1">
+            Running axed version 0.0.1
+          </p>
+        </Badge>
       </Container>
     </Section>
   );
