@@ -8,7 +8,7 @@ axe = Axe()
 
 # Get current date
 now = datetime.now()
-date_string = now.strftime("%%d-%m-%Y")
+date_string = now.strftime("%d-%m-%Y")
 
 # Open the CSV file for writing
 filename = f'accessibility-report-wellington.csv'
@@ -31,11 +31,21 @@ with open(filename, 'w', newline='') as file:
                 page.goto(url, timeout=60000)
                 result = axe.run(page)
                 violations = result.get('violations', [])
-                writer.writerow([url, ', '.join([str(v) for v in violations])])
-                tqdm.write(f"{len(violations)} violations found on {url}")
+                
+                if violations:
+                    # If violations are found, write them to the CSV file
+                    writer.writerow([url, ', '.join([str(v) for v in violations]), "", ""])
+                    tqdm.write(f"{len(violations)} violations found on {url}")
+                else:
+                    # If no violations are found, write an empty row with the URL
+                    writer.writerow([url, "", "", ""])
+                    tqdm.write(f"No violations found on {url}")
+                    
             except Exception as e:
                 # Handle exceptions, like timeouts, and log them
                 tqdm.write(f"Timeout or other error occurred while visiting {url}: {e}")
+                # Write an empty row with the URL and an error comment
+                writer.writerow([url, "", "", f"Error: {e}"])
             finally:
                 # Ensure the page is closed after each iteration
                 page.close()
