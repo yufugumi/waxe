@@ -21,11 +21,6 @@ export default function Home() {
         <meta property="og:type" content="website" />
         <meta name="theme-color" content="#ffffff" />
         <meta
-          name="theme-color"
-          content="#000000"
-          media="(prefers-color-scheme: dark)"
-        />
-        <meta
           property="description"
           content="See the latest Axe report and track outstanding accessibility issues."
         />

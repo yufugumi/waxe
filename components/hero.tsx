@@ -42,13 +42,13 @@ const Hero = () => {
         <div className="flex gap-4">
           <Link
             href="https://github.com/et0and/wellington.govt.nz-axe/releases/latest"
-            className="inline-block px-4 py-2 bg-black text-white rounded-lg hover:bg-blue-600 focus:outline-double focus:outline-4"
+            className="inline-block px-4 py-2 bg-black text-white text-sm md:text-lg rounded-lg hover:bg-blue-600 focus:outline-double focus:outline-4"
           >
             Open latest
           </Link>
           <Link
             href="https://github.com/et0and/wellington.govt.nz-axe/releases"
-            className="inline-block px-4 py-2 border border-gray-200 bg-gray-100 border-current text-current rounded-lg focus:outline-double focus:outline-4 hover:bg-sky-100"
+            className="inline-block px-4 py-2 border border-gray-200 bg-gray-100 text-sm md:text-lg border-current text-current rounded-lg focus:outline-double focus:outline-4 hover:bg-sky-100"
           >
             Past reports
           </Link>
