@@ -29,7 +29,7 @@ const Hero = () => {
         <div className="flex gap-4">
           <Button className="hover:bg-blue-600">
             <Link href="https://github.com/et0and/wellington.govt.nz-axe/releases/latest">
-              Download latest
+              Open latest
             </Link>
           </Button>
           <Button variant="outline" className="hover:bg-sky-100">
