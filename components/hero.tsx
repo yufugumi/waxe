@@ -26,33 +26,29 @@ const Hero = () => {
   }, []);
 
   return (
-    <Section className="relative backdrop-blur-sm">
-      <Container className="flex flex-col gap-8 rounded-md border bg-muted/50 p-4">
-        <h1 className="text-2xl font-medium">
-          Wellington.govt.nz accessibility reports
+    <Section className="relative backdrop-blur-sm ">
+      <Container className="flex flex-col rounded-md border bg-muted/50 p-4 shadow-xl">
+        <h1 className="text-2xl font-semibold">
+          Website accessibility reports
         </h1>
 
         <p>
           Download and track changes for accessibility issues picked up by Axe.
-        <br/>
-        
-          Currently, the website has <strong>{issueCount}</strong> issues.
         </p>
 
-        <div className="flex gap-4">
           <Link
             href="https://github.com/et0and/wellington.govt.nz-axe/releases/latest"
-            className="inline-block px-4 py-2 bg-black text-white text-sm md:text-lg rounded-lg hover:bg-blue-600 focus:outline-double focus:outline-4"
+            className="font-medium py-4 hover:text-blue-600 hover:underline focus:outline-double focus:outline-4"
           >
             Open latest
           </Link>
           <Link
             href="https://github.com/et0and/wellington.govt.nz-axe/releases"
-            className="inline-block px-4 py-2 border border-gray-200 bg-gray-100 text-sm md:text-lg border-current text-current rounded-lg focus:outline-double focus:outline-4 hover:bg-sky-100"
+            className="font-medium pb-4 hover:text-blue-600 hover:underline focus:outline-double focus:outline-4"
           >
             Past reports
           </Link>
-        </div>
+
         <Badge
           className="focus:outline-double not-prose w-fit"
           variant="outline"
