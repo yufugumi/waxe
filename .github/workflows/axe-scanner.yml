@@ -1,7 +1,6 @@
 name: Monthly axe core scan
 
 on:
-  push:
   schedule:
     - cron: '0 0 1 * *'  # This runs the script at 00:00 on the 1st of every month, might change frequency in the future
 
@@ -56,10 +55,6 @@ jobs:
     - name: Generate tag version
       id: tag_version
       run: echo ::set-output name=new_tag::$(date +'v%Y-%m-%d')
-
-    - name: Generate release notes
-      run: |
-        echo "This release contains the Axe monthly accessibility report for wellington.govt.nz generated on $(date +'%Y-%m-%d')" > release_notes.md
 
     - name: Create a new release
       if: success() # Only create a release if the previous steps were successful
