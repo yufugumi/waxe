@@ -1,6 +1,7 @@
 name: Monthly TEPP accessibility scan
 
 on:
+  push:
   schedule:
     - cron: '0 0 1 * *'  
 
@@ -50,7 +51,7 @@ jobs:
       uses: ncipollo/release-action@v1
       with:
         tag: ${{ steps.tag_version.outputs.new_tag }}
-        name: Monthly accessibility report for outdoor event booking
-        body: New a11y report for outdoor event booking
+        name: Monthly accessibility report for outdoor event bookings
+        body: New a11y report for https://services.wellington.govt.nz/outdoor-event-booking
         artifacts: "outdoor-event-booking.csv"
         allowUpdates: true
