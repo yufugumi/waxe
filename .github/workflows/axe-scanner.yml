@@ -2,10 +2,9 @@ name: Monthly axe core scan
 
 on:
   schedule:
-    - cron: '0 0 1 * *'  # This runs the script at 00:00 on the 1st of every month, might change frequency in the future
+    - cron: '0 0 1 * *'  # This runs the script at 23:59 on the last day of every month
 
 jobs:
-
   run-script:
     runs-on: ubuntu-latest
     timeout-minutes: 800
@@ -41,8 +40,11 @@ jobs:
       run: trafilatura --sitemap -u https://wellington.govt.nz/sitemap.xml --list > urls.txt
 
     - name: Run Python script
-      run: python wcc-axe.py
-      timeout-minutes: 420
+      uses: nick-fields/retry@v2
+      with:
+        timeout_minutes: 420
+        max_attempts: 2
+        command: python wcc-axe.py
 
     - name: Commit changes
       run: |
@@ -54,7 +56,7 @@ jobs:
 
     - name: Generate tag version
       id: tag_version
-      run: echo ::set-output name=new_tag::$(date +'v%Y-%m-%d')
+      run: echo "new_tag=$(date +'v%Y-%m-%d')" >> $GITHUB_OUTPUT
 
     - name: Create a new release
       if: success() # Only create a release if the previous steps were successful
@@ -62,6 +64,6 @@ jobs:
       with:
         tag: ${{ steps.tag_version.outputs.new_tag }}
         name: Monthly accessibility report for wellington.govt.nz
-        body: release_notes.md
+        body: New a11y report for wellington.govt.nz
         artifacts: "*.csv"
         allowUpdates: true
