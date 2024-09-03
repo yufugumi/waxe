@@ -17,7 +17,7 @@ with open(filename, 'w', newline='') as file:
     writer.writerow(["URL", "Violations", "Status of issue", "Comment"])
 
     # Read the URLs from the file
-    with open('urls.txt', 'r') as url_file:
+    with open('letstalkurls.txt', 'r') as url_file:
         urls = [url.strip() for url in url_file]  # Remove any trailing newline and store URLs
 
     # Use tqdm to wrap around urls for progress bar
