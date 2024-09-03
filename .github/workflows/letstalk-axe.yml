@@ -45,7 +45,7 @@ jobs:
       with:
         timeout_minutes: 420
         max_attempts: 2
-        command: python wcc-axe.py
+        command: python letstalk-axe.py
 
     - name: Commit changes
       run: |
