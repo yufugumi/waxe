@@ -1,0 +1,70 @@
+name: Monthly let's talk axe core scan
+
+on:
+  push:
+  schedule:
+    - cron: '0 0 1 * *' 
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    timeout-minutes: 800
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Cache Playwright
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/ms-playwright
+        key: ${{ runner.os }}-playwright-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-playwright-
+
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install trafilatura playwright tqdm
+        pip install axe-core-python
+
+    - name: Install Playwright dependencies
+      run: |
+        playwright install
+        playwright install-deps
+
+    - name: Generate URLs file
+      run: trafilatura --sitemap -u https://www.letstalk.wellington.govt.nz/sitemap.xml --list > letstalkurls.txt
+
+    - name: Run Python script
+      uses: nick-fields/retry@v2
+      with:
+        timeout_minutes: 420
+        max_attempts: 2
+        command: python wcc-axe.py
+
+    - name: Commit changes
+      run: |
+        git config --global user.name 'GitHub Actions'
+        git config --global user.email 'actions@github.com'
+        git add *
+        git commit -m "New a11y report for letstalk.wellington.govt.nz" || echo "No changes to commit"
+        git push
+
+    - name: Generate tag version
+      id: tag_version
+      run: echo "new_tag=$(date +'v%Y-%m-%d')" >> $GITHUB_OUTPUT
+
+    - name: Create a new release
+      if: success() # Only create a release if the previous steps were successful
+      uses: ncipollo/release-action@v1
+      with:
+        tag: ${{ steps.tag_version.outputs.new_tag }}
+        name: Monthly accessibility report for letstalk.wellington.govt.nz
+        body: New a11y report for letstalk.wellington.govt.nz
+        artifacts: "*.csv"
+        allowUpdates: true
