@@ -1,6 +1,6 @@
 import csv
 from playwright.sync_api import sync_playwright
-from axe_core_python.sync_api import Axe
+from axe_core_python.sync_playwright import Axe
 from tqdm import tqdm
 from datetime import datetime
 
