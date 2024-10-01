@@ -1,7 +1,7 @@
 https://www.letstalk.wellington.govt.nz/
 https://www.letstalk.wellington.govt.nz/accessibility
 https://www.letstalk.wellington.govt.nz/terms-use
-https://www.letstalk.wellington.govt.nz/privacy-policy
+https://www.letstalk.wellington.govt.nz/privacy-statement
 https://www.letstalk.wellington.govt.nz/moderation
 https://www.letstalk.wellington.govt.nz/search
 https://www.letstalk.wellington.govt.nz/projects
@@ -46,17 +46,14 @@ https://www.letstalk.wellington.govt.nz/climate-change-action
 https://www.letstalk.wellington.govt.nz/fees-charges
 https://www.letstalk.wellington.govt.nz/own-laterals
 https://www.letstalk.wellington.govt.nz/priorities-decisions
-https://www.letstalk.wellington.govt.nz/plan-cost
 https://www.letstalk.wellington.govt.nz/trading-and-events-in-public-places-policy
 https://www.letstalk.wellington.govt.nz/representation-review-2021
-https://www.letstalk.wellington.govt.nz/waste-options
 https://www.letstalk.wellington.govt.nz/development-contributions
 https://www.letstalk.wellington.govt.nz/town-belt
 https://www.letstalk.wellington.govt.nz/traffic-resolutions-feb-2022
 https://www.letstalk.wellington.govt.nz/sludge
 https://www.letstalk.wellington.govt.nz/mt-vic-trail
 https://www.letstalk.wellington.govt.nz/economic-wellbeing
-https://www.letstalk.wellington.govt.nz/hawkins-hill
 https://www.letstalk.wellington.govt.nz/southern-landfill
 https://www.letstalk.wellington.govt.nz/traffic-resolutions-april22
 https://www.letstalk.wellington.govt.nz/city-housing
@@ -146,6 +143,7 @@ https://www.letstalk.wellington.govt.nz/ltp-2021-31
 https://www.letstalk.wellington.govt.nz/lets-talk-being-hosted-new-platform
 https://www.letstalk.wellington.govt.nz/artwork-submissions
 https://www.letstalk.wellington.govt.nz/traffic-resolutions-october-2024
+https://www.letstalk.wellington.govt.nz/traffic-resolutions-november-2024
 https://www.letstalk.wellington.govt.nz/transport/whats-changing-and-why
 https://www.letstalk.wellington.govt.nz/transport/our-work-programme-in-year-2
 https://www.letstalk.wellington.govt.nz/transport/looking-ahead
@@ -224,3 +222,4 @@ https://www.letstalk.wellington.govt.nz/holloway-road-play/holloway-road-pa-upda
 https://www.letstalk.wellington.govt.nz/homebush-road-play/homebush-road-pa-update
 https://www.letstalk.wellington.govt.nz/churton-park-play/churton-park-pa-update
 https://www.letstalk.wellington.govt.nz/salford-street-play/salford-street-play-area-design-update
+https://www.letstalk.wellington.govt.nz/traffic-resolutions-november-2024/survey-tr-nov-2024
