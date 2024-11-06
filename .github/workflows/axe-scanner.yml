@@ -3,7 +3,7 @@ name: Monthly accessibility scans
 on:
   push:
   schedule:
-    - cron: '0 0 1 * *' 
+    - cron: "0 0 1 * *"
 
 jobs:
   wellington-scan:
@@ -11,109 +11,149 @@ jobs:
     timeout-minutes: 800
 
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.10'
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
 
-    - name: Cache Playwright
-      uses: actions/cache@v3
-      with:
-        path: ~/.cache/ms-playwright
-        key: ${{ runner.os }}-playwright-${{ hashFiles('**/requirements.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-playwright-
+      - name: Cache Playwright
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install trafilatura playwright tqdm axe-core-python
-        playwright install
-        playwright install-deps
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install trafilatura playwright tqdm axe-core-python
+          playwright install
+          playwright install-deps
 
-    - name: Generate URLs for wellington.govt.nz
-      run: trafilatura --sitemap -u https://wellington.govt.nz/sitemap.xml --list > urls.txt
+      - name: Generate URLs for wellington.govt.nz
+        run: trafilatura --sitemap -u https://wellington.govt.nz/sitemap.xml --list > urls.txt
 
-    - name: Run wellington.govt.nz axe scan
-      uses: nick-fields/retry@v2
-      with:
-        timeout_minutes: 420
-        max_attempts: 2
-        command: python wcc-axe.py
+      - name: Run wellington.govt.nz axe scan
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 420
+          max_attempts: 2
+          command: python wcc-axe.py
 
-    - name: Commit changes
-      run: |
-        git pull
-        git config --global user.name 'GitHub Actions'
-        git config --global user.email 'actions@github.com'
-        git add *
-        git commit -m "New a11y report for wellington.govt.nz" || echo "No changes to commit"
-        git push
+      - name: Commit changes
+        run: |
+          git pull
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email 'actions@github.com'
+          git add *
+          git commit -m "New a11y report for wellington.govt.nz" || echo "No changes to commit"
+          git push
 
   letstalk-scan:
     runs-on: ubuntu-latest
     timeout-minutes: 800
 
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.10'
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
 
-    - name: Cache Playwright
-      uses: actions/cache@v3
-      with:
-        path: ~/.cache/ms-playwright
-        key: ${{ runner.os }}-playwright-${{ hashFiles('**/requirements.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-playwright-
+      - name: Cache Playwright
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install trafilatura playwright tqdm axe-core-python
-        playwright install
-        playwright install-deps
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install trafilatura playwright tqdm axe-core-python
+          playwright install
+          playwright install-deps
 
-    - name: Generate URLs for letstalk.wellington.govt.nz
-      run: trafilatura --sitemap -u https://www.letstalk.wellington.govt.nz/sitemap.xml --list > letstalkurls.txt
+      - name: Generate URLs for letstalk.wellington.govt.nz
+        run: trafilatura --sitemap -u https://www.letstalk.wellington.govt.nz/sitemap.xml --list > letstalkurls.txt
 
-    - name: Run letstalk.wellington.govt.nz scan
-      uses: nick-fields/retry@v2
-      with:
-        timeout_minutes: 420
-        max_attempts: 2
-        command: python letstalk-axe.py
+      - name: Run letstalk.wellington.govt.nz scan
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 420
+          max_attempts: 2
+          command: python letstalk-axe.py
 
-    - name: Commit letstalk.wellington.govt.nz changes
-      run: |
-        git pull
-        git config --global user.name 'GitHub Actions'
-        git config --global user.email 'actions@github.com'
-        git add *
-        git commit -m "New a11y report for letstalk.wellington.govt.nz" || echo "No changes to commit"
-        git push
+      - name: Commit letstalk.wellington.govt.nz changes
+        run: |
+          git pull
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email 'actions@github.com'
+          git add *
+          git commit -m "New a11y report for letstalk.wellington.govt.nz" || echo "No changes to commit"
+          git push
+
+  tutuki-scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      - name: Install dependencies
+        run: |
+          npm install @playwright/test
+          npm install @axe-core/playwright
+          npm install csv-writer
+          npx playwright install
+          npx playwright install-deps
+
+      - name: Run Tutuki accessibility tests
+        run: npx playwright test tutuki.spec.ts
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: tutuki-accessibility-results
+          path: tutuki-accessibility-results/
+          retention-days: 30
+
+      - name: Commit Tutuki results
+        run: |
+          git pull
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email 'actions@github.com'
+          git add tutuki-accessibility-results/
+          git commit -m "New a11y report for Tutuki services" || echo "No changes to commit"
+          git push
 
   create-release:
-    needs: [wellington-scan, letstalk-scan]
+    needs: [wellington-scan, letstalk-scan, tutuki-scan]
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Generate tag version
-      id: tag_version
-      run: echo "new_tag=$(date +'v%Y-%m-%d')" >> $GITHUB_OUTPUT
+      - name: Generate tag version
+        id: tag_version
+        run: echo "new_tag=$(date +'v%Y-%m-%d')" >> $GITHUB_OUTPUT
 
-    - name: Create a new release
-      uses: ncipollo/release-action@v1
-      with:
-        tag: ${{ steps.tag_version.outputs.new_tag }}
-        name: Monthly accessibility reports
-        body: New a11y reports for wellington.govt.nz and letstalk.wellington.govt.nz
-        artifacts: "*.csv"
-        allowUpdates: true
+      - name: Create a new release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ steps.tag_version.outputs.new_tag }}
+          name: Monthly accessibility reports
+          body: New a11y reports for wellington.govt.nz, letstalk.wellington.govt.nz, and Tutuki services
+          artifacts: "**/*.csv"
+          allowUpdates: true
