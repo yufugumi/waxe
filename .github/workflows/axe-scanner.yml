@@ -141,7 +141,7 @@ jobs:
           git push
 
   create-release:
-    needs: [wellington-scan, letstalk-scan, tutuki-scan]
+    needs: [wellington-scan, letstalk-scan]
     runs-on: ubuntu-latest
 
     steps:
