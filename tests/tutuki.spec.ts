@@ -418,11 +418,10 @@ test("Report a problem - FIXit", async ({ page }) => {
         .locator('[id="details\\.location\\.address"] div')
         .nth(3)
         .click();
-      await page.getByLabel("Enter the address of the").fill("1");
+      await page.getByLabel("Enter the address of the").fill("113 The Terrace");
       await page
-        .getByText("1-15 The Avenue, Mount Roskill, Auckland 1041", {
-          exact: true,
-        })
+        .getByText("113 The Terrace, Wellington Central")
+        .nth(1)
         .click();
       await page.getByTestId("details.description").click();
       await page
@@ -465,11 +464,12 @@ test("Alcohol - new on-licence", async ({ page }) => {
         .getByTestId("applicantsExperience")
         .fill("I spit a mean 16 bar");
       await page.locator("#address div").nth(3).click();
-      await page.getByLabel("Applicant’s address *option").fill("1");
       await page
-        .getByText("1-15 The Avenue, Mount Roskill, Auckland 1041", {
-          exact: true,
-        })
+        .getByLabel("Applicant’s address *option")
+        .fill("1-15 The Avenue, Mount Roskill");
+      await page
+        .getByText("1-15 The Avenue, Mount Roskill, Auckland 1041")
+        .nth(1)
         .click();
       await page.getByTestId("emailAddress").fill("test@test.com");
       await page.getByTestId("phoneNumber").fill("021 111 1111");
@@ -683,6 +683,431 @@ test("Alcohol - new on-licence", async ({ page }) => {
       await page.goto(
         "https://services.wellington.govt.nz/alcohol-licensing/new-on-licence/step/payment/"
       );
+    },
+  ]);
+});
+
+test("Alcohol - renew duty manager's certificate", async ({ page }) => {
+  const exampleFilePath = "./test.pdf";
+
+  await runAccessibilityTest(page, "alcohol-renew-managers-certificate", [
+    async () => {
+      await page.goto(
+        "https://services.wellington.govt.nz/alcohol-licensing/renew-managers-certificate/"
+      );
+      await page.getByTestId("getStarted").click();
+      await page
+        .getByTestId("contactPerson-No - I am the duty manager")
+        .check();
+      await page.getByTestId("givenNames").fill("Tom");
+      await page.getByTestId("familyName").fill("Test");
+      await page.getByTestId("otherNames-No").check();
+      await page.getByTestId("dateOfBirth-date").fill("20");
+      await page.getByTestId("dateOfBirth-month").fill("08");
+      await page.getByTestId("dateOfBirth-year").fill("1995");
+      await page.locator(".css-19bb58m").first().click();
+      await page.getByText("Afghanistan", { exact: true }).click();
+      await page.getByTestId("gender-Male").check();
+      await page.getByTestId("occupation").fill("Plumber");
+      await page.locator("#address div").nth(3).click();
+      await page
+        .getByTestId("address-label")
+        .locator("div")
+        .filter({ hasText: "Start typing to search..." })
+        .nth(2)
+        .click();
+      await page
+        .getByLabel("Applicant’s address *option")
+        .fill("113 The Terrace. Wellington");
+      await page
+        .getByText("113 The Terrace, Wellington Central, Wellington 6011", {
+          exact: true,
+        })
+        .click();
+      await page.getByTestId("emailAddress").fill("test@test.com");
+      await page.getByTestId("phoneNumber").fill("021 111 11111");
+      await page.getByTestId("managerConvictions-No").check();
+
+      await page.getByTestId("photoIdentification-uploadButton").click();
+      await page
+        .locator('input[type="file"]')
+        .first()
+        .setInputFiles(exampleFilePath);
+      await page.waitForTimeout(1000);
+
+      await page.getByTestId("next").click();
+    },
+    async () => {
+      await page.getByTestId("certificateIssuedByWCC-No").check();
+
+      await page.getByTestId("dutyManagersCertificates-uploadButton").click();
+      await page
+        .locator('input[type="file"]')
+        .first()
+        .setInputFiles(exampleFilePath);
+      await page.waitForTimeout(1000);
+
+      await page.getByTestId("managersCertificateExpiry-date").fill("20");
+      await page.getByTestId("managersCertificateExpiry-month").fill("08");
+      await page.getByTestId("managersCertificateExpiry-year").fill("2025");
+      await page.waitForTimeout(1000);
+
+      await page
+        .getByTestId("managersLicenseControllerCertificate-uploadButton")
+        .click();
+
+      await page
+        .locator('input[type="file"]')
+        .nth(1)
+        .setInputFiles(exampleFilePath);
+      await page.waitForTimeout(1000);
+
+      await page.getByTestId("LCQBefore2012-No").check();
+      await page.getByTestId("currentDutyManager-Yes").check();
+      await page
+        .getByTestId("currentDutyManagerCurrentEmployer")
+        .fill("The Bar");
+      await page.getByTestId("stepsToManageSale").fill("Hehe");
+      await page.getByTestId("next").click();
+    },
+    async () => {
+      await page.getByTestId("declaration").check();
+      await page.getByTestId("next").click();
+    },
+    async () => {
+      await page.goto(
+        "https://services.wellington.govt.nz/alcohol-licensing/renew-managers-certificate/step/payment/"
+      );
+    },
+  ]);
+});
+
+test("Alcohol - temporary authority to sell alcohol", async ({ page }) => {
+  const exampleFilePath = "./test.pdf";
+
+  await runAccessibilityTest(page, "alcohol-temp-authority", [
+    async () => {
+      await page.goto(
+        "https://services.wellington.govt.nz/alcohol-licensing/temporary-authority/"
+      );
+      await page.getByTestId("getStarted").click();
+      await page.getByTestId("contactPersonGivenNames").fill("Test");
+      await page.getByTestId("contactPersonFamilyName").fill("Test");
+      await page.getByTestId("contactPersonPhoneNumber").fill("021 111 1111");
+      await page.getByTestId("contactPersonEmailAddress").fill("test@test.com");
+      await page.getByTestId("firstApplication-Yes").check();
+      await page.getByTestId("applicationReason-Purchasing a business").check();
+      await page.getByTestId("applicantType-Individual").check();
+      await page.getByTestId("givenNames").fill("Test");
+      await page.getByTestId("familyName").fill("Test");
+      await page.getByTestId("applicantsExperience").click();
+      await page
+        .getByTestId("applicantsExperience")
+        .fill("I have lots of experience");
+      await page
+        .getByTestId("address-label")
+        .locator("div")
+        .filter({ hasText: "Start typing to search..." })
+        .nth(2)
+        .click();
+      await page
+        .getByLabel("Applicant’s address *option")
+        .fill("113 The Terrace, Wellington");
+      await page
+        .getByText("113 The Terrace, Wellington Central, Wellington 6011", {
+          exact: true,
+        })
+        .click();
+      await page.getByTestId("emailAddress").fill("test@test.com");
+      await page.getByTestId("phoneNumber").fill("021 111 1111");
+      await page.getByTestId("individualConvictions-No").check();
+      await page.getByTestId("next").click();
+      await page.getByTestId("currentTradingName").fill("Big Business LLC");
+      await page.getByTestId("newTradingName").fill("Small Business LLC");
+      await page.getByTestId("dateStartTrading-date").fill("01");
+      await page.getByTestId("dateStartTrading-month").fill("10");
+      await page.getByTestId("dateStartTrading-year").fill("2029");
+      await page.getByTestId("currentLicenceType-Off-licence").check();
+      await page.getByTestId("currentLicenceNumber").fill("123456");
+
+      await page.getByTestId("currentLicence-uploadButton").click();
+      await page
+        .locator('input[type="file"]')
+        .first()
+        .setInputFiles(exampleFilePath);
+      await page.waitForTimeout(1000);
+
+      await page.getByTestId("next").click();
+      await page.locator("#businessAddress div").nth(3).click();
+      await page
+        .getByLabel("Business address *option ,")
+        .fill("113 The Terrace, Wellington");
+      await page
+        .getByText("113 The Terrace, Wellington Central, Wellington 6011", {
+          exact: true,
+        })
+        .click();
+      await page.getByTestId("premisesOwnedByApplicant-Yes").check();
+
+      await page.getByTestId("recordOfTitle-uploadButton").click();
+      await page
+        .locator('input[type="file"]')
+        .first()
+        .setInputFiles(exampleFilePath);
+      await page.waitForTimeout(1000);
+
+      await page.getByTestId("next").click();
+      await page
+        .getByTestId("managerDetails.0.contactPersonGivenNames")
+        .fill("Test");
+      await page
+        .getByTestId("managerDetails.0.contactPersonFamilyName")
+        .fill("Test");
+      await page
+        .getByTestId("managerDetails.0.managersCertificateExpiry-date")
+        .fill("01");
+      await page
+        .getByTestId("managerDetails.0.managersCertificateExpiry-month")
+        .fill("10");
+      await page
+        .getByTestId("managerDetails.0.managersCertificateExpiry-year")
+        .fill("2029");
+      await page
+        .getByTestId("managerDetails.0.certificateIssuedByWCC-No")
+        .check();
+
+      await page
+        .getByTestId("managerDetails.0.dutyManagersCertificates-uploadButton")
+        .click();
+      await page
+        .locator('input[type="file"]')
+        .first()
+        .setInputFiles(exampleFilePath);
+      await page.waitForTimeout(1000);
+
+      await page.getByTestId("next").click();
+      await page.getByTestId("next").click();
+      await page.getByTestId("next").click();
+      await page.getByTestId("declaration").check();
+      await page.getByTestId("next").click();
+
+      await page.goto(
+        "https://services.wellington.govt.nz/alcohol-licensing/temporary-authority/step/payment/"
+      );
+      await page.getByTestId("pay-now").click();
+    },
+  ]);
+});
+
+test("Alcohol - new off-licence", async ({ page }) => {
+  const exampleFilePath = "./test.pdf";
+
+  await runAccessibilityTest(page, "alcohol-new-off-licence", [
+    async () => {
+      await page.goto(
+        "https://services.wellington.govt.nz/alcohol-licensing/new-off-licence/"
+      );
+      await page.getByTestId("getStarted").click();
+      await page.getByTestId("contactPersonGivenNames").fill("Test");
+      await page.getByTestId("contactPersonFamilyName").fill("Test");
+      await page.getByTestId("contactPersonPhoneNumber").fill("021 111 1111");
+      await page.getByTestId("contactPersonEmailAddress").fill("test@test.com");
+      await page.getByTestId("applicantType-Individual").check();
+      await page.getByTestId("givenNames").fill("Test");
+      await page.getByTestId("familyName").fill("Test");
+      await page.getByTestId("dateOfBirth-date").fill("01");
+      await page.getByTestId("dateOfBirth-month").fill("01");
+      await page.getByTestId("dateOfBirth-year").fill("1970");
+
+      await page.locator(".css-19bb58m").first().click();
+      await page.getByText("Afghanistan", { exact: true }).click();
+      await page.getByTestId("gender-Male").check();
+      await page.getByTestId("occupation").fill("Plumber");
+      await page
+        .getByTestId("applicantsExperience")
+        .fill("I have lots of experience");
+      await page
+        .getByTestId("address-label")
+        .locator("div")
+        .filter({ hasText: "Start typing to search..." })
+        .nth(2)
+        .click();
+      await page
+        .getByLabel("Applicant’s address *option")
+        .fill("113 The Terrace, Wellington");
+      await page
+        .getByText("113 The Terrace, Wellington Central, Wellington 6011", {
+          exact: true,
+        })
+        .click();
+      await page.getByTestId("emailAddress").fill("test@test.com");
+      await page.getByTestId("phoneNumber").fill("021 111 1111");
+      await page.getByTestId("individualConvictions-No").check();
+      await page.getByTestId("next").click();
+      await page.getByTestId("tradingName").fill("Big Business LLC");
+      await page.getByTestId("businessType-Bottle store").check();
+      await page.getByTestId("description").fill("We sell de alcohol");
+      await page.getByTestId("alcoholPrincipalService-No").check();
+      await page
+        .locator("div")
+        .filter({ hasText: /^MondayClosed$/ })
+        .getByLabel("Closed")
+        .check();
+      await page
+        .locator("div")
+        .filter({ hasText: /^TuesdayClosed$/ })
+        .getByLabel("Closed")
+        .check();
+      await page
+        .locator("div")
+        .filter({ hasText: /^WednesdayClosed$/ })
+        .getByLabel("Closed")
+        .check();
+      await page
+        .locator("div")
+        .filter({ hasText: /^ThursdayClosed$/ })
+        .getByLabel("Closed")
+        .check();
+      await page
+        .locator("div")
+        .filter({ hasText: /^FridayClosed$/ })
+        .getByLabel("Closed")
+        .check();
+      await page
+        .locator("div")
+        .filter({ hasText: /^SaturdayClosed$/ })
+        .getByLabel("Closed")
+        .check();
+      await page
+        .locator("div")
+        .filter({ hasText: /^SundayClosed$/ })
+        .getByLabel("Closed")
+        .check();
+      await page.getByTestId("next").click();
+      await page.locator("#businessAddress div").nth(3).click();
+      await page
+        .getByLabel("Business address *option ,")
+        .fill("113 The Terrace, Wellington");
+      await page
+        .getByText("113 The Terrace, Wellington Central, Wellington 6011", {
+          exact: true,
+        })
+        .click();
+      await page.getByTestId("maximumOccupancy").fill("100");
+      await page
+        .getByLabel("Does the applicant own the")
+        .locator("label")
+        .filter({ hasText: "Yes" })
+        .locator("span")
+        .click();
+      await page.getByTestId("premisesNewBuild-Yes").check();
+      await page
+        .getByLabel("Is the premises a new build?")
+        .locator("label")
+        .filter({ hasText: "No" })
+        .locator("span")
+        .click();
+      await page
+        .getByLabel("Is the licence being applied")
+        .locator("label")
+        .filter({ hasText: "No" })
+        .locator("span")
+        .click();
+      await page.getByTestId("premisesAdditions[0]-Supervised area").check();
+      await page
+        .getByTestId("premisesAdditions[0]-No designated areas")
+        .check();
+      await page.getByTestId("premisesAdditions[1]-Restricted area").check();
+      await page.getByTestId("isLocationCorrect-Yes").check();
+      await page.getByTestId("recordOfTitle-uploadButton").click();
+      await page
+        .locator('input[type="file"]')
+        .first()
+        .setInputFiles(exampleFilePath);
+      await page.waitForTimeout(1000);
+      await page.getByTestId("scalePlan-uploadButton").click();
+      await page
+        .locator('input[type="file"]')
+        .nth(1)
+        .setInputFiles(exampleFilePath);
+      await page.waitForTimeout(1000);
+      await page.getByTestId("premisesImpression-uploadButton").click();
+      await page
+        .locator('input[type="file"]')
+        .nth(2)
+        .setInputFiles(exampleFilePath);
+      await page.waitForTimeout(1000);
+      await page.getByTestId("buildingCertificate-uploadButton").click();
+      await page
+        .locator('input[type="file"]')
+        .nth(3)
+        .setInputFiles(exampleFilePath);
+      await page.waitForTimeout(1000);
+      await page.getByTestId("townPlanningCertificate-uploadButton").click();
+      await page
+        .locator('input[type="file"]')
+        .nth(4)
+        .setInputFiles(exampleFilePath);
+      await page.waitForTimeout(1000);
+      await page.getByTestId("next").click();
+      await page.getByTestId("applyingToAddEndorsement-No").check();
+      await page.getByTestId("CPTED-No").check();
+
+      await page
+        .getByTestId("managerDetails.0.contactPersonGivenNames")
+        .fill("Test");
+
+      await page
+        .getByTestId("managerDetails.0.contactPersonFamilyName")
+        .fill("Test");
+
+      await page
+        .getByTestId("managerDetails.0.managersCertificateExpiry-date")
+        .fill("01");
+      await page
+        .getByTestId("managerDetails.0.managersCertificateExpiry-month")
+        .fill("01");
+      await page
+        .getByTestId("managerDetails.0.managersCertificateExpiry-year")
+        .fill("2029");
+      await page
+        .getByTestId("managerDetails.0.certificateIssuedByWCC-No")
+        .check();
+      await page
+        .getByTestId("managerDetails.0.dutyManagersCertificates-uploadButton")
+        .click();
+      await page
+        .locator('input[type="file"]')
+        .first()
+        .setInputFiles(exampleFilePath);
+      await page.waitForTimeout(1000);
+      await page.getByTestId("next").click();
+      await page.getByTestId("hostResponsibilityPolicy-uploadButton").click();
+      await page
+        .locator('input[type="file"]')
+        .first()
+        .setInputFiles(exampleFilePath);
+      await page.waitForTimeout(1000);
+      await page.getByTestId("staffTrainingPlan-uploadButton").click();
+      await page
+        .locator('input[type="file"]')
+        .nth(1)
+        .setInputFiles(exampleFilePath);
+      await page.waitForTimeout(1000);
+      await page.getByTestId("evacuationDeclaration-uploadButton").click();
+      await page
+        .locator('input[type="file"]')
+        .nth(2)
+        .setInputFiles(exampleFilePath);
+      await page.waitForTimeout(1000);
+      await page.getByTestId("securityMeasures").fill("Big security man");
+      await page.getByTestId("next").click();
+      await page.getByTestId("declaration").check();
+      await page.getByTestId("next").click();
+      await page.goto(
+        "https://services.wellington.govt.nz/alcohol-licensing/new-off-licence/step/payment/"
+      );
+      await page.getByTestId("pay-now").click();
     },
   ]);
 });
