@@ -66,7 +66,6 @@ jobs:
           git push
 
   letstalk-scan:
-    needs: wellington-scan
     runs-on: ubuntu-latest
     timeout-minutes: 800
     if: ${{ github.event.inputs.scan_filter == 'all' || github.event.inputs.scan_filter == 'letstalk' || github.event_name == 'schedule' }}
@@ -114,7 +113,6 @@ jobs:
           git push
 
   archives-online-scan:
-    needs: letstalk-scan
     runs-on: ubuntu-latest
     timeout-minutes: 800
     if: ${{ github.event.inputs.scan_filter == 'all' || github.event.inputs.scan_filter == 'archives' || github.event_name == 'schedule' }}
@@ -139,7 +137,6 @@ jobs:
           git push
 
   tutuki-scan:
-    needs: wellington-scan
     runs-on: ubuntu-latest
     timeout-minutes: 60
     if: ${{ github.event.inputs.scan_filter == 'all' || github.event.inputs.scan_filter == 'tutuki' || github.event_name == 'schedule' }}
@@ -181,7 +178,6 @@ jobs:
           git push
 
   create-release:
-    needs: [wellington-scan, letstalk-scan, archives-online-scan]
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'schedule' }}
 
