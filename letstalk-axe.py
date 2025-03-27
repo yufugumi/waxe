@@ -2,8 +2,7 @@ from playwright.sync_api import sync_playwright
 from axe_core_python.sync_playwright import Axe
 from tqdm import tqdm
 from datetime import datetime
-import json
-import os
+import html  # For HTML escaping
 
 axe = Axe()
 
@@ -32,29 +31,38 @@ html_template = """<!DOCTYPE html>
             border-bottom: 2px solid #eee;
             padding-bottom: 10px;
         }}
+        h2 {{
+            margin-top: 30px;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border-left: 4px solid #2c3e50;
+        }}
         .summary {{
             background-color: #f8f9fa;
             padding: 15px;
             border-radius: 5px;
             margin-bottom: 20px;
         }}
-        .url-card {{
+        .url-section {{
+            margin-bottom: 40px;
             border: 1px solid #ddd;
             border-radius: 5px;
-            margin-bottom: 20px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }}
         .url-header {{
             background-color: #f1f1f1;
-            padding: 10px 15px;
+            padding: 15px;
             border-bottom: 1px solid #ddd;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }}
+        .url-content {{
+            padding: 20px;
+        }}
         .url-status {{
             display: inline-block;
-            padding: 3px 8px;
+            padding: 5px 10px;
             border-radius: 3px;
             font-size: 14px;
             font-weight: bold;
@@ -71,21 +79,22 @@ html_template = """<!DOCTYPE html>
             background-color: #fff3cd;
             color: #856404;
         }}
-        .url-content {{
-            padding: 15px;
-        }}
         .violation {{
-            margin-bottom: 15px;
+            margin-bottom: 25px;
             padding-bottom: 15px;
             border-bottom: 1px solid #eee;
         }}
+        .violation:last-child {{
+            border-bottom: none;
+        }}
         .violation-header {{
             font-weight: bold;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
+            font-size: 18px;
         }}
         .violation-impact {{
             display: inline-block;
-            padding: 2px 6px;
+            padding: 3px 8px;
             border-radius: 3px;
             font-size: 12px;
             margin-left: 10px;
@@ -107,40 +116,35 @@ html_template = """<!DOCTYPE html>
             color: white;
         }}
         .violation-description {{
-            margin-bottom: 10px;
-        }}
-        .nodes-list {{
-            background-color: #f8f9fa;
-            padding: 10px;
-            border-radius: 5px;
-            margin-top: 5px;
-        }}
-        pre {{
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            background-color: #f5f5f5;
-            padding: 10px;
-            border-radius: 4px;
-            overflow-x: auto;
+            margin-bottom: 15px;
         }}
         .help-link {{
             display: inline-block;
-            margin-top: 5px;
+            margin-top: 10px;
+            margin-bottom: 15px;
             color: #007bff;
             text-decoration: none;
         }}
         .help-link:hover {{
             text-decoration: underline;
         }}
-        .collapse-btn {{
-            background: none;
-            border: none;
-            color: #007bff;
-            cursor: pointer;
-            font-size: 14px;
+        .node-item {{
+            margin-bottom: 15px;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
         }}
-        .hidden {{
-            display: none;
+        code {{
+            display: block;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-family: monospace;
+            margin: 10px 0;
+            border: 1px solid #ddd;
         }}
     </style>
 </head>
@@ -153,46 +157,32 @@ html_template = """<!DOCTYPE html>
         <p><strong>URLs with no issues:</strong> {urls_with_no_issues}</p>
         <p><strong>Total violations found:</strong> {total_violations}</p>
     </div>
+    
     <div id="results">
         {results_content}
     </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {{
-            // Add click handlers for all collapse buttons
-            document.querySelectorAll('.collapse-btn').forEach(button => {{
-                button.addEventListener('click', function() {{
-                    const content = this.parentElement.nextElementSibling;
-                    const isHidden = content.classList.contains('hidden');
-                    
-                    if (isHidden) {{
-                        content.classList.remove('hidden');
-                        this.textContent = 'Hide details';
-                    }} else {{
-                        content.classList.add('hidden');
-                        this.textContent = 'Show details';
-                    }}
-                }});
-            }});
-        }});
-    </script>
 </body>
 </html>
 """
 
 def format_violation(violation):
-    """Format a single violation as HTML"""
+    """Format a single violation as HTML with code blocks for violations"""
     impact_class = f"impact-{violation['impact']}" if 'impact' in violation else ""
     
     nodes_html = ""
     if 'nodes' in violation:
-        for node in violation['nodes']:
-            html = node.get('html', 'No HTML available')
-            target = ', '.join(node.get('target', ['No target available']))
+        for i, node in enumerate(violation['nodes']):
+            # Escape HTML to prevent rendering
+            html_content = html.escape(node.get('html', 'No HTML available'))
+            target = html.escape(', '.join(node.get('target', ['No target available'])))
             
             nodes_html += f"""
-            <div class="nodes-list">
-                <div><strong>Element:</strong> {html}</div>
-                <div><strong>Selector:</strong> {target}</div>
+            <div class="node-item">
+                <div><strong>Element {i+1}:</strong></div>
+                <div><strong>HTML:</strong></div>
+                <code>{html_content}</code>
+                <div><strong>Selector:</strong></div>
+                <code>{target}</code>
             </div>
             """
     
@@ -205,12 +195,9 @@ def format_violation(violation):
         <div class="violation-description">{violation.get('help', 'No help available')}</div>
         <div><strong>Description:</strong> {violation.get('description', 'No description available')}</div>
         <a href="{violation.get('helpUrl', '#')}" class="help-link" target="_blank">Learn more</a>
-        <div>
-            <button class="collapse-btn">Show details</button>
-        </div>
-        <div class="nodes-content hidden">
-            {nodes_html}
-        </div>
+        
+        <h3>Affected Elements:</h3>
+        {nodes_html}
     </div>
     """
 
@@ -223,7 +210,7 @@ def generate_report():
     results_content = ""
     
     # Read the URLs from the file
-    with open('letstalkurls.txt', 'r') as url_file:
+    with open('letstalk-urls.txt', 'r') as url_file:
         urls = [url.strip() for url in url_file]
     
     total_urls = len(urls)
@@ -246,7 +233,7 @@ def generate_report():
                     
                     violations_html = "".join([format_violation(v) for v in violations])
                     results_content += f"""
-                    <div class="url-card">
+                    <div class="url-section">
                         <div class="url-header">
                             <h2>{url}</h2>
                             <span class="url-status status-violations">{len(violations)} Violations</span>
@@ -260,7 +247,7 @@ def generate_report():
                 else:
                     urls_with_no_issues += 1
                     results_content += f"""
-                    <div class="url-card">
+                    <div class="url-section">
                         <div class="url-header">
                             <h2>{url}</h2>
                             <span class="url-status status-pass">No Violations</span>
@@ -275,7 +262,7 @@ def generate_report():
             except Exception as e:
                 urls_with_errors += 1
                 results_content += f"""
-                <div class="url-card">
+                <div class="url-section">
                     <div class="url-header">
                         <h2>{url}</h2>
                         <span class="url-status status-error">Error</span>
@@ -304,7 +291,7 @@ def generate_report():
     )
     
     # Write the HTML report to a file
-    filename = f'accessibility-report-wellington-{date_string}.html'
+    filename = f'accessibility-report-lets-talk-{date_string}.html'
     with open(filename, 'w', encoding='utf-8') as file:
         file.write(report_html)
     
