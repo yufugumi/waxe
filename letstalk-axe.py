@@ -210,7 +210,7 @@ def generate_report():
     results_content = ""
     
     # Read the URLs from the file
-    with open('letstalk-urls.txt', 'r') as url_file:
+    with open('letstalkurls.txt', 'r') as url_file:
         urls = [url.strip() for url in url_file]
     
     total_urls = len(urls)
