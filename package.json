@@ -1,14 +1,8 @@
 {
   "name": "wellington-axe",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "test:accessibility": "playwright test e2e-tests/outdoor-event-booking.spec.ts"
-  },
+  "scripts": {},
   "dependencies": {
     "@axe-core/playwright": "^4.9.1",
     "csv-writer": "^1.6.0",
