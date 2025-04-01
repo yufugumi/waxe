@@ -200,7 +200,7 @@ jobs:
   create-release:
     runs-on: ubuntu-latest
     # Run after all jobs have completed (regardless of success/failure), only on schedule
-    if: ${{ always() && github.event_name == 'schedule' }}
+    if: ${{ always() && (github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && github.event.inputs.scan_filter == 'all')) }}
     needs: [wellington-scan, letstalk-scan, archives-online-scan, tutuki-scan]
   
     steps:
