@@ -199,20 +199,22 @@ jobs:
 
   create-release:
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'schedule' }}
-
+    # Run after all jobs have completed (regardless of success/failure), only on schedule
+    if: ${{ always() && github.event_name == 'schedule' }}
+    needs: [wellington-scan, letstalk-scan, archives-online-scan, tutuki-scan]
+  
     steps:
-      - uses: actions/checkout@v3
+    - uses: actions/checkout@v3
 
-      - name: Generate tag version
-        id: tag_version
-        run: echo "new_tag=$(date +'v%Y-%m-%d')" >> $GITHUB_OUTPUT
+    - name: Generate tag version
+      id: tag_version
+      run: echo "new_tag=$(date +'v%Y-%m-%d')" >> $GITHUB_OUTPUT
 
-      - name: Create a new release
-        uses: ncipollo/release-action@v1
-        with:
-          tag: ${{ steps.tag_version.outputs.new_tag }}
-          name: Monthly accessibility reports
-          body: New a11y reports for wellington.govt.nz, letstalk.wellington.govt.nz, and Archives online
-          artifacts: "**/*.csv"
-          allowUpdates: true
+    - name: Create a new release
+      uses: ncipollo/release-action@v1
+      with:
+        tag: ${{ steps.tag_version.outputs.new_tag }}
+        name: Monthly accessibility reports
+        body: New a11y reports for wellington.govt.nz, letstalk.wellington.govt.nz, and Archives online
+        artifacts: "**/*.csv"
+        allowUpdates: true
