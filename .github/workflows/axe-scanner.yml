@@ -216,5 +216,5 @@ jobs:
         tag: ${{ steps.tag_version.outputs.new_tag }}
         name: Monthly accessibility reports
         body: New a11y reports for wellington.govt.nz, letstalk.wellington.govt.nz, and Archives online
-        artifacts: "**/*.csv"
+        artifacts: "**/*.html"
         allowUpdates: true
