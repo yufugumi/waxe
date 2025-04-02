@@ -3065,27 +3065,59 @@
       <h2>https://archivesonline.wcc.govt.nz/nodes/view/13415</h2>
        
       <div class="violation">
-        <h3>image-redundant-alt: Alternative text of images should not be repeated as text</h3>
-        <p>Impact: minor</p>
-        <p>Ensure image alternative is not repeated as text</p>
+        <h3>color-contrast: Elements must have sufficient color contrast</h3>
+        <p>Impact: serious</p>
+        <p>Ensures the contrast between foreground and background colors meets WCAG 2 AA contrast ratio thresholds</p>
         <h4>HTML Location:</h4>
-        <code>&lt;img src=&#34;data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOSIgaGVpZ2h0PSIxNCIgdmlld0JveD0iMCAwIDkgMTQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+IDxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMS43ODQ2NyAwTDAuNTAwMjA1IDEuMjg0NDZMNi4yMTUwMyA3TDAuNTAwMjA1IDEyLjcxNTVMMS43ODQ2NyAxNEw4Ljc4NDY3IDdMMS43ODQ2NyAwWiIgZmlsbD0iYmxhY2siLz4gPC9zdmc+IA==&#34; alt=&#34;begin&#34; style=&#34;margin-left: 5px;&#34;&gt;</code>
+        <code>&lt;a href=&#34;https://archivesonline.wcc.govt.nz/nodes/view/1634&#34;&gt;WCC, Library Photograph Collection copy negatives&lt;/a&gt;</code>
       </div>
       
       <div class="violation">
-        <h3>landmark-one-main: Document should have one main landmark</h3>
+        <h3>heading-order: Heading levels should only increase by one</h3>
         <p>Impact: moderate</p>
-        <p>Ensures the document has a main landmark</p>
+        <p>Ensures the order of headings is semantically correct</p>
         <h4>HTML Location:</h4>
-        <code>&lt;html lang=&#34;en&#34;&gt;</code>
+        <code>&lt;div role=&#34;heading&#34; aria-level=&#34;3&#34; class=&#34;portlet-header&#34;&gt;&lt;span class=&#34;expandcolapse sprite&#34;&gt;&lt;/span&gt;Descriptive Data&lt;/div&gt;</code>
       </div>
       
       <div class="violation">
-        <h3>region: All page content should be contained by landmarks</h3>
-        <p>Impact: moderate</p>
-        <p>Ensures all page content is contained by landmarks</p>
+        <h3>label: Form elements must have labels</h3>
+        <p>Impact: critical</p>
+        <p>Ensures every form element has a label</p>
         <h4>HTML Location:</h4>
-        <code>&lt;div&gt;&lt;h1 style=&#34;font-weight: normal; color: rgb(221, 107, 16);&#34;&gt;Let&#39;s confirm you are human&lt;/h1&gt;&lt;/div&gt;</code>
+        <code>&lt;input type=&#34;radio&#34; name=&#34;data[showHideRadio]&#34; id=&#34;ShowHideRadio2&#34; value=&#34;2&#34; checked=&#34;checked&#34;&gt;</code>
+      </div>
+      
+      <div class="violation">
+        <h3>landmark-banner-is-top-level: Banner landmark should not be contained in another landmark</h3>
+        <p>Impact: moderate</p>
+        <p>Ensures the banner landmark is at top level</p>
+        <h4>HTML Location:</h4>
+        <code>&lt;div id=&#34;header&#34; role=&#34;banner&#34;&gt;</code>
+      </div>
+      
+      <div class="violation">
+        <h3>landmark-no-duplicate-contentinfo: Document should not have more than one contentinfo landmark</h3>
+        <p>Impact: moderate</p>
+        <p>Ensures the document has at most one contentinfo landmark</p>
+        <h4>HTML Location:</h4>
+        <code>&lt;div id=&#34;footer&#34; role=&#34;contentinfo&#34;&gt;</code>
+      </div>
+      
+      <div class="violation">
+        <h3>landmark-unique: Ensures landmarks are unique</h3>
+        <p>Impact: moderate</p>
+        <p>Landmarks should have a unique role or role/label/title (i.e. accessible name) combination</p>
+        <h4>HTML Location:</h4>
+        <code>&lt;div id=&#34;footer&#34; role=&#34;contentinfo&#34;&gt;</code>
+      </div>
+      
+      <div class="violation">
+        <h3>link-name: Links must have discernible text</h3>
+        <p>Impact: serious</p>
+        <p>Ensures links have discernible text</p>
+        <h4>HTML Location:</h4>
+        <code>&lt;a href=&#34;/&#34;&gt;&lt;img src=&#34;/theme/archivesonline/img/logo.png?1736215631&#34; title=&#34;&#34; alt=&#34;&#34;&gt;&lt;/a&gt;</code>
       </div>
        
     </section>
@@ -3094,27 +3126,59 @@
       <h2>https://archivesonline.wcc.govt.nz/nodes/view/674282</h2>
        
       <div class="violation">
-        <h3>image-redundant-alt: Alternative text of images should not be repeated as text</h3>
-        <p>Impact: minor</p>
-        <p>Ensure image alternative is not repeated as text</p>
+        <h3>color-contrast: Elements must have sufficient color contrast</h3>
+        <p>Impact: serious</p>
+        <p>Ensures the contrast between foreground and background colors meets WCAG 2 AA contrast ratio thresholds</p>
         <h4>HTML Location:</h4>
-        <code>&lt;img src=&#34;data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOSIgaGVpZ2h0PSIxNCIgdmlld0JveD0iMCAwIDkgMTQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+IDxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMS43ODQ2NyAwTDAuNTAwMjA1IDEuMjg0NDZMNi4yMTUwMyA3TDAuNTAwMjA1IDEyLjcxNTVMMS43ODQ2NyAxNEw4Ljc4NDY3IDdMMS43ODQ2NyAwWiIgZmlsbD0iYmxhY2siLz4gPC9zdmc+IA==&#34; alt=&#34;begin&#34; style=&#34;margin-left: 5px;&#34;&gt;</code>
+        <code>&lt;a href=&#34;https://archivesonline.wcc.govt.nz/nodes/view/687397&#34; class=&#34;pclevel1&#34; title=&#34;Visit of Chinese Admiral, mayoral reception&#34;&gt;Visit of Chinese Admiral...&lt;/a&gt;</code>
       </div>
       
       <div class="violation">
-        <h3>landmark-one-main: Document should have one main landmark</h3>
+        <h3>heading-order: Heading levels should only increase by one</h3>
         <p>Impact: moderate</p>
-        <p>Ensures the document has a main landmark</p>
+        <p>Ensures the order of headings is semantically correct</p>
         <h4>HTML Location:</h4>
-        <code>&lt;html lang=&#34;en&#34;&gt;</code>
+        <code>&lt;div role=&#34;heading&#34; aria-level=&#34;3&#34; class=&#34;portlet-header&#34;&gt;&lt;span class=&#34;expandcolapse sprite&#34;&gt;&lt;/span&gt;Descriptive Data&lt;/div&gt;</code>
       </div>
       
       <div class="violation">
-        <h3>region: All page content should be contained by landmarks</h3>
-        <p>Impact: moderate</p>
-        <p>Ensures all page content is contained by landmarks</p>
+        <h3>label: Form elements must have labels</h3>
+        <p>Impact: critical</p>
+        <p>Ensures every form element has a label</p>
         <h4>HTML Location:</h4>
-        <code>&lt;div&gt;&lt;h1 style=&#34;font-weight: normal; color: rgb(221, 107, 16);&#34;&gt;Let&#39;s confirm you are human&lt;/h1&gt;&lt;/div&gt;</code>
+        <code>&lt;input type=&#34;radio&#34; name=&#34;data[showHideRadio]&#34; id=&#34;ShowHideRadio2&#34; value=&#34;2&#34; checked=&#34;checked&#34;&gt;</code>
+      </div>
+      
+      <div class="violation">
+        <h3>landmark-banner-is-top-level: Banner landmark should not be contained in another landmark</h3>
+        <p>Impact: moderate</p>
+        <p>Ensures the banner landmark is at top level</p>
+        <h4>HTML Location:</h4>
+        <code>&lt;div id=&#34;header&#34; role=&#34;banner&#34;&gt;</code>
+      </div>
+      
+      <div class="violation">
+        <h3>landmark-no-duplicate-contentinfo: Document should not have more than one contentinfo landmark</h3>
+        <p>Impact: moderate</p>
+        <p>Ensures the document has at most one contentinfo landmark</p>
+        <h4>HTML Location:</h4>
+        <code>&lt;div id=&#34;footer&#34; role=&#34;contentinfo&#34;&gt;</code>
+      </div>
+      
+      <div class="violation">
+        <h3>landmark-unique: Ensures landmarks are unique</h3>
+        <p>Impact: moderate</p>
+        <p>Landmarks should have a unique role or role/label/title (i.e. accessible name) combination</p>
+        <h4>HTML Location:</h4>
+        <code>&lt;div id=&#34;footer&#34; role=&#34;contentinfo&#34;&gt;</code>
+      </div>
+      
+      <div class="violation">
+        <h3>link-name: Links must have discernible text</h3>
+        <p>Impact: serious</p>
+        <p>Ensures links have discernible text</p>
+        <h4>HTML Location:</h4>
+        <code>&lt;a href=&#34;/&#34;&gt;&lt;img src=&#34;/theme/archivesonline/img/logo.png?1736215631&#34; title=&#34;&#34; alt=&#34;&#34;&gt;&lt;/a&gt;</code>
       </div>
        
     </section>
@@ -3123,27 +3187,59 @@
       <h2>https://archivesonline.wcc.govt.nz/nodes/view/852962</h2>
        
       <div class="violation">
-        <h3>image-redundant-alt: Alternative text of images should not be repeated as text</h3>
-        <p>Impact: minor</p>
-        <p>Ensure image alternative is not repeated as text</p>
+        <h3>color-contrast: Elements must have sufficient color contrast</h3>
+        <p>Impact: serious</p>
+        <p>Ensures the contrast between foreground and background colors meets WCAG 2 AA contrast ratio thresholds</p>
         <h4>HTML Location:</h4>
-        <code>&lt;img src=&#34;data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOSIgaGVpZ2h0PSIxNCIgdmlld0JveD0iMCAwIDkgMTQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+IDxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMS43ODQ2NyAwTDAuNTAwMjA1IDEuMjg0NDZMNi4yMTUwMyA3TDAuNTAwMjA1IDEyLjcxNTVMMS43ODQ2NyAxNEw4Ljc4NDY3IDdMMS43ODQ2NyAwWiIgZmlsbD0iYmxhY2siLz4gPC9zdmc+IA==&#34; alt=&#34;begin&#34; style=&#34;margin-left: 5px;&#34;&gt;</code>
+        <code>&lt;a href=&#34;https://archivesonline.wcc.govt.nz/nodes/view/2036&#34;&gt;WCC, City Photographer&#39;s photographic transparency (35mm slide) library&lt;/a&gt;</code>
       </div>
       
       <div class="violation">
-        <h3>landmark-one-main: Document should have one main landmark</h3>
+        <h3>heading-order: Heading levels should only increase by one</h3>
         <p>Impact: moderate</p>
-        <p>Ensures the document has a main landmark</p>
+        <p>Ensures the order of headings is semantically correct</p>
         <h4>HTML Location:</h4>
-        <code>&lt;html lang=&#34;en&#34;&gt;</code>
+        <code>&lt;div role=&#34;heading&#34; aria-level=&#34;3&#34; class=&#34;portlet-header&#34;&gt;&lt;span class=&#34;expandcolapse sprite&#34;&gt;&lt;/span&gt;Descriptive Data&lt;/div&gt;</code>
       </div>
       
       <div class="violation">
-        <h3>region: All page content should be contained by landmarks</h3>
-        <p>Impact: moderate</p>
-        <p>Ensures all page content is contained by landmarks</p>
+        <h3>label: Form elements must have labels</h3>
+        <p>Impact: critical</p>
+        <p>Ensures every form element has a label</p>
         <h4>HTML Location:</h4>
-        <code>&lt;div&gt;&lt;h1 style=&#34;font-weight: normal; color: rgb(221, 107, 16);&#34;&gt;Let&#39;s confirm you are human&lt;/h1&gt;&lt;/div&gt;</code>
+        <code>&lt;input type=&#34;radio&#34; name=&#34;data[showHideRadio]&#34; id=&#34;ShowHideRadio2&#34; value=&#34;2&#34; checked=&#34;checked&#34;&gt;</code>
+      </div>
+      
+      <div class="violation">
+        <h3>landmark-banner-is-top-level: Banner landmark should not be contained in another landmark</h3>
+        <p>Impact: moderate</p>
+        <p>Ensures the banner landmark is at top level</p>
+        <h4>HTML Location:</h4>
+        <code>&lt;div id=&#34;header&#34; role=&#34;banner&#34;&gt;</code>
+      </div>
+      
+      <div class="violation">
+        <h3>landmark-no-duplicate-contentinfo: Document should not have more than one contentinfo landmark</h3>
+        <p>Impact: moderate</p>
+        <p>Ensures the document has at most one contentinfo landmark</p>
+        <h4>HTML Location:</h4>
+        <code>&lt;div id=&#34;footer&#34; role=&#34;contentinfo&#34;&gt;</code>
+      </div>
+      
+      <div class="violation">
+        <h3>landmark-unique: Ensures landmarks are unique</h3>
+        <p>Impact: moderate</p>
+        <p>Landmarks should have a unique role or role/label/title (i.e. accessible name) combination</p>
+        <h4>HTML Location:</h4>
+        <code>&lt;div id=&#34;footer&#34; role=&#34;contentinfo&#34;&gt;</code>
+      </div>
+      
+      <div class="violation">
+        <h3>link-name: Links must have discernible text</h3>
+        <p>Impact: serious</p>
+        <p>Ensures links have discernible text</p>
+        <h4>HTML Location:</h4>
+        <code>&lt;a href=&#34;/&#34;&gt;&lt;img src=&#34;/theme/archivesonline/img/logo.png?1736215631&#34; title=&#34;&#34; alt=&#34;&#34;&gt;&lt;/a&gt;</code>
       </div>
        
     </section>
@@ -3152,27 +3248,59 @@
       <h2>https://archivesonline.wcc.govt.nz/nodes/view/677320</h2>
        
       <div class="violation">
-        <h3>image-redundant-alt: Alternative text of images should not be repeated as text</h3>
-        <p>Impact: minor</p>
-        <p>Ensure image alternative is not repeated as text</p>
+        <h3>color-contrast: Elements must have sufficient color contrast</h3>
+        <p>Impact: serious</p>
+        <p>Ensures the contrast between foreground and background colors meets WCAG 2 AA contrast ratio thresholds</p>
         <h4>HTML Location:</h4>
-        <code>&lt;img src=&#34;data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOSIgaGVpZ2h0PSIxNCIgdmlld0JveD0iMCAwIDkgMTQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+IDxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMS43ODQ2NyAwTDAuNTAwMjA1IDEuMjg0NDZMNi4yMTUwMyA3TDAuNTAwMjA1IDEyLjcxNTVMMS43ODQ2NyAxNEw4Ljc4NDY3IDdMMS43ODQ2NyAwWiIgZmlsbD0iYmxhY2siLz4gPC9zdmc+IA==&#34; alt=&#34;begin&#34; style=&#34;margin-left: 5px;&#34;&gt;</code>
+        <code>&lt;a href=&#34;https://archivesonline.wcc.govt.nz/nodes/view/687575&#34; class=&#34;pclevel1&#34; title=&#34;Ngauranga Gorge, excavation for harbour fill&#34;&gt;Ngauranga Gorge, excavat...&lt;/a&gt;</code>
       </div>
       
       <div class="violation">
-        <h3>landmark-one-main: Document should have one main landmark</h3>
+        <h3>heading-order: Heading levels should only increase by one</h3>
         <p>Impact: moderate</p>
-        <p>Ensures the document has a main landmark</p>
+        <p>Ensures the order of headings is semantically correct</p>
         <h4>HTML Location:</h4>
-        <code>&lt;html lang=&#34;en&#34;&gt;</code>
+        <code>&lt;div role=&#34;heading&#34; aria-level=&#34;3&#34; class=&#34;portlet-header&#34;&gt;&lt;span class=&#34;expandcolapse sprite&#34;&gt;&lt;/span&gt;Descriptive Data&lt;/div&gt;</code>
       </div>
       
       <div class="violation">
-        <h3>region: All page content should be contained by landmarks</h3>
-        <p>Impact: moderate</p>
-        <p>Ensures all page content is contained by landmarks</p>
+        <h3>label: Form elements must have labels</h3>
+        <p>Impact: critical</p>
+        <p>Ensures every form element has a label</p>
         <h4>HTML Location:</h4>
-        <code>&lt;div&gt;&lt;h1 style=&#34;font-weight: normal; color: rgb(221, 107, 16);&#34;&gt;Let&#39;s confirm you are human&lt;/h1&gt;&lt;/div&gt;</code>
+        <code>&lt;input type=&#34;radio&#34; name=&#34;data[showHideRadio]&#34; id=&#34;ShowHideRadio2&#34; value=&#34;2&#34; checked=&#34;checked&#34;&gt;</code>
+      </div>
+      
+      <div class="violation">
+        <h3>landmark-banner-is-top-level: Banner landmark should not be contained in another landmark</h3>
+        <p>Impact: moderate</p>
+        <p>Ensures the banner landmark is at top level</p>
+        <h4>HTML Location:</h4>
+        <code>&lt;div id=&#34;header&#34; role=&#34;banner&#34;&gt;</code>
+      </div>
+      
+      <div class="violation">
+        <h3>landmark-no-duplicate-contentinfo: Document should not have more than one contentinfo landmark</h3>
+        <p>Impact: moderate</p>
+        <p>Ensures the document has at most one contentinfo landmark</p>
+        <h4>HTML Location:</h4>
+        <code>&lt;div id=&#34;footer&#34; role=&#34;contentinfo&#34;&gt;</code>
+      </div>
+      
+      <div class="violation">
+        <h3>landmark-unique: Ensures landmarks are unique</h3>
+        <p>Impact: moderate</p>
+        <p>Landmarks should have a unique role or role/label/title (i.e. accessible name) combination</p>
+        <h4>HTML Location:</h4>
+        <code>&lt;div id=&#34;footer&#34; role=&#34;contentinfo&#34;&gt;</code>
+      </div>
+      
+      <div class="violation">
+        <h3>link-name: Links must have discernible text</h3>
+        <p>Impact: serious</p>
+        <p>Ensures links have discernible text</p>
+        <h4>HTML Location:</h4>
+        <code>&lt;a href=&#34;/&#34;&gt;&lt;img src=&#34;/theme/archivesonline/img/logo.png?1736215631&#34; title=&#34;&#34; alt=&#34;&#34;&gt;&lt;/a&gt;</code>
       </div>
        
     </section>
@@ -3181,27 +3309,59 @@
       <h2>https://archivesonline.wcc.govt.nz/nodes/view/121470</h2>
        
       <div class="violation">
-        <h3>image-redundant-alt: Alternative text of images should not be repeated as text</h3>
-        <p>Impact: minor</p>
-        <p>Ensure image alternative is not repeated as text</p>
+        <h3>color-contrast: Elements must have sufficient color contrast</h3>
+        <p>Impact: serious</p>
+        <p>Ensures the contrast between foreground and background colors meets WCAG 2 AA contrast ratio thresholds</p>
         <h4>HTML Location:</h4>
-        <code>&lt;img src=&#34;data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOSIgaGVpZ2h0PSIxNCIgdmlld0JveD0iMCAwIDkgMTQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+IDxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMS43ODQ2NyAwTDAuNTAwMjA1IDEuMjg0NDZMNi4yMTUwMyA3TDAuNTAwMjA1IDEyLjcxNTVMMS43ODQ2NyAxNEw4Ljc4NDY3IDdMMS43ODQ2NyAwWiIgZmlsbD0iYmxhY2siLz4gPC9zdmc+IA==&#34; alt=&#34;begin&#34; style=&#34;margin-left: 5px;&#34;&gt;</code>
+        <code>&lt;a href=&#34;https://archivesonline.wcc.govt.nz/nodes/view/1642&#34;&gt;WCC, Transport photographs&lt;/a&gt;</code>
       </div>
       
       <div class="violation">
-        <h3>landmark-one-main: Document should have one main landmark</h3>
+        <h3>heading-order: Heading levels should only increase by one</h3>
         <p>Impact: moderate</p>
-        <p>Ensures the document has a main landmark</p>
+        <p>Ensures the order of headings is semantically correct</p>
         <h4>HTML Location:</h4>
-        <code>&lt;html lang=&#34;en&#34;&gt;</code>
+        <code>&lt;div role=&#34;heading&#34; aria-level=&#34;3&#34; class=&#34;portlet-header&#34;&gt;&lt;span class=&#34;expandcolapse sprite&#34;&gt;&lt;/span&gt;Descriptive Data&lt;/div&gt;</code>
       </div>
       
       <div class="violation">
-        <h3>region: All page content should be contained by landmarks</h3>
-        <p>Impact: moderate</p>
-        <p>Ensures all page content is contained by landmarks</p>
+        <h3>label: Form elements must have labels</h3>
+        <p>Impact: critical</p>
+        <p>Ensures every form element has a label</p>
         <h4>HTML Location:</h4>
-        <code>&lt;div&gt;&lt;h1 style=&#34;font-weight: normal; color: rgb(221, 107, 16);&#34;&gt;Let&#39;s confirm you are human&lt;/h1&gt;&lt;/div&gt;</code>
+        <code>&lt;input type=&#34;radio&#34; name=&#34;data[showHideRadio]&#34; id=&#34;ShowHideRadio2&#34; value=&#34;2&#34; checked=&#34;checked&#34;&gt;</code>
+      </div>
+      
+      <div class="violation">
+        <h3>landmark-banner-is-top-level: Banner landmark should not be contained in another landmark</h3>
+        <p>Impact: moderate</p>
+        <p>Ensures the banner landmark is at top level</p>
+        <h4>HTML Location:</h4>
+        <code>&lt;div id=&#34;header&#34; role=&#34;banner&#34;&gt;</code>
+      </div>
+      
+      <div class="violation">
+        <h3>landmark-no-duplicate-contentinfo: Document should not have more than one contentinfo landmark</h3>
+        <p>Impact: moderate</p>
+        <p>Ensures the document has at most one contentinfo landmark</p>
+        <h4>HTML Location:</h4>
+        <code>&lt;div id=&#34;footer&#34; role=&#34;contentinfo&#34;&gt;</code>
+      </div>
+      
+      <div class="violation">
+        <h3>landmark-unique: Ensures landmarks are unique</h3>
+        <p>Impact: moderate</p>
+        <p>Landmarks should have a unique role or role/label/title (i.e. accessible name) combination</p>
+        <h4>HTML Location:</h4>
+        <code>&lt;div id=&#34;footer&#34; role=&#34;contentinfo&#34;&gt;</code>
+      </div>
+      
+      <div class="violation">
+        <h3>link-name: Links must have discernible text</h3>
+        <p>Impact: serious</p>
+        <p>Ensures links have discernible text</p>
+        <h4>HTML Location:</h4>
+        <code>&lt;a href=&#34;/&#34;&gt;&lt;img src=&#34;/theme/archivesonline/img/logo.png?1736215631&#34; title=&#34;&#34; alt=&#34;&#34;&gt;&lt;/a&gt;</code>
       </div>
        
     </section>
@@ -3210,27 +3370,59 @@
       <h2>https://archivesonline.wcc.govt.nz/nodes/view/867393</h2>
        
       <div class="violation">
-        <h3>image-redundant-alt: Alternative text of images should not be repeated as text</h3>
-        <p>Impact: minor</p>
-        <p>Ensure image alternative is not repeated as text</p>
+        <h3>color-contrast: Elements must have sufficient color contrast</h3>
+        <p>Impact: serious</p>
+        <p>Ensures the contrast between foreground and background colors meets WCAG 2 AA contrast ratio thresholds</p>
         <h4>HTML Location:</h4>
-        <code>&lt;img src=&#34;data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOSIgaGVpZ2h0PSIxNCIgdmlld0JveD0iMCAwIDkgMTQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+IDxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMS43ODQ2NyAwTDAuNTAwMjA1IDEuMjg0NDZMNi4yMTUwMyA3TDAuNTAwMjA1IDEyLjcxNTVMMS43ODQ2NyAxNEw4Ljc4NDY3IDdMMS43ODQ2NyAwWiIgZmlsbD0iYmxhY2siLz4gPC9zdmc+IA==&#34; alt=&#34;begin&#34; style=&#34;margin-left: 5px;&#34;&gt;</code>
+        <code>&lt;a href=&#34;https://archivesonline.wcc.govt.nz/nodes/view/2036&#34;&gt;WCC, City Photographer&#39;s photographic transparency (35mm slide) library&lt;/a&gt;</code>
       </div>
       
       <div class="violation">
-        <h3>landmark-one-main: Document should have one main landmark</h3>
+        <h3>heading-order: Heading levels should only increase by one</h3>
         <p>Impact: moderate</p>
-        <p>Ensures the document has a main landmark</p>
+        <p>Ensures the order of headings is semantically correct</p>
         <h4>HTML Location:</h4>
-        <code>&lt;html lang=&#34;en&#34;&gt;</code>
+        <code>&lt;div role=&#34;heading&#34; aria-level=&#34;3&#34; class=&#34;portlet-header&#34;&gt;&lt;span class=&#34;expandcolapse sprite&#34;&gt;&lt;/span&gt;Descriptive Data&lt;/div&gt;</code>
       </div>
       
       <div class="violation">
-        <h3>region: All page content should be contained by landmarks</h3>
-        <p>Impact: moderate</p>
-        <p>Ensures all page content is contained by landmarks</p>
+        <h3>label: Form elements must have labels</h3>
+        <p>Impact: critical</p>
+        <p>Ensures every form element has a label</p>
         <h4>HTML Location:</h4>
-        <code>&lt;div&gt;&lt;h1 style=&#34;font-weight: normal; color: rgb(221, 107, 16);&#34;&gt;Let&#39;s confirm you are human&lt;/h1&gt;&lt;/div&gt;</code>
+        <code>&lt;input type=&#34;radio&#34; name=&#34;data[showHideRadio]&#34; id=&#34;ShowHideRadio2&#34; value=&#34;2&#34; checked=&#34;checked&#34;&gt;</code>
+      </div>
+      
+      <div class="violation">
+        <h3>landmark-banner-is-top-level: Banner landmark should not be contained in another landmark</h3>
+        <p>Impact: moderate</p>
+        <p>Ensures the banner landmark is at top level</p>
+        <h4>HTML Location:</h4>
+        <code>&lt;div id=&#34;header&#34; role=&#34;banner&#34;&gt;</code>
+      </div>
+      
+      <div class="violation">
+        <h3>landmark-no-duplicate-contentinfo: Document should not have more than one contentinfo landmark</h3>
+        <p>Impact: moderate</p>
+        <p>Ensures the document has at most one contentinfo landmark</p>
+        <h4>HTML Location:</h4>
+        <code>&lt;div id=&#34;footer&#34; role=&#34;contentinfo&#34;&gt;</code>
+      </div>
+      
+      <div class="violation">
+        <h3>landmark-unique: Ensures landmarks are unique</h3>
+        <p>Impact: moderate</p>
+        <p>Landmarks should have a unique role or role/label/title (i.e. accessible name) combination</p>
+        <h4>HTML Location:</h4>
+        <code>&lt;div id=&#34;footer&#34; role=&#34;contentinfo&#34;&gt;</code>
+      </div>
+      
+      <div class="violation">
+        <h3>link-name: Links must have discernible text</h3>
+        <p>Impact: serious</p>
+        <p>Ensures links have discernible text</p>
+        <h4>HTML Location:</h4>
+        <code>&lt;a href=&#34;/&#34;&gt;&lt;img src=&#34;/theme/archivesonline/img/logo.png?1736215631&#34; title=&#34;&#34; alt=&#34;&#34;&gt;&lt;/a&gt;</code>
       </div>
        
     </section>
@@ -3239,27 +3431,59 @@
       <h2>https://archivesonline.wcc.govt.nz/nodes/view/671513</h2>
        
       <div class="violation">
-        <h3>image-redundant-alt: Alternative text of images should not be repeated as text</h3>
-        <p>Impact: minor</p>
-        <p>Ensure image alternative is not repeated as text</p>
+        <h3>color-contrast: Elements must have sufficient color contrast</h3>
+        <p>Impact: serious</p>
+        <p>Ensures the contrast between foreground and background colors meets WCAG 2 AA contrast ratio thresholds</p>
         <h4>HTML Location:</h4>
-        <code>&lt;img src=&#34;data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOSIgaGVpZ2h0PSIxNCIgdmlld0JveD0iMCAwIDkgMTQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+IDxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMS43ODQ2NyAwTDAuNTAwMjA1IDEuMjg0NDZMNi4yMTUwMyA3TDAuNTAwMjA1IDEyLjcxNTVMMS43ODQ2NyAxNEw4Ljc4NDY3IDdMMS43ODQ2NyAwWiIgZmlsbD0iYmxhY2siLz4gPC9zdmc+IA==&#34; alt=&#34;begin&#34; style=&#34;margin-left: 5px;&#34;&gt;</code>
+        <code>&lt;a href=&#34;https://archivesonline.wcc.govt.nz/nodes/view/686241&#34; class=&#34;pclevel1&#34; title=&#34;Copies of Plans&#34;&gt;Copies of Plans&lt;/a&gt;</code>
       </div>
       
       <div class="violation">
-        <h3>landmark-one-main: Document should have one main landmark</h3>
+        <h3>heading-order: Heading levels should only increase by one</h3>
         <p>Impact: moderate</p>
-        <p>Ensures the document has a main landmark</p>
+        <p>Ensures the order of headings is semantically correct</p>
         <h4>HTML Location:</h4>
-        <code>&lt;html lang=&#34;en&#34;&gt;</code>
+        <code>&lt;div role=&#34;heading&#34; aria-level=&#34;3&#34; class=&#34;portlet-header&#34;&gt;&lt;span class=&#34;expandcolapse sprite&#34;&gt;&lt;/span&gt;Descriptive Data&lt;/div&gt;</code>
       </div>
       
       <div class="violation">
-        <h3>region: All page content should be contained by landmarks</h3>
-        <p>Impact: moderate</p>
-        <p>Ensures all page content is contained by landmarks</p>
+        <h3>label: Form elements must have labels</h3>
+        <p>Impact: critical</p>
+        <p>Ensures every form element has a label</p>
         <h4>HTML Location:</h4>
-        <code>&lt;div&gt;&lt;h1 style=&#34;font-weight: normal; color: rgb(221, 107, 16);&#34;&gt;Let&#39;s confirm you are human&lt;/h1&gt;&lt;/div&gt;</code>
+        <code>&lt;input type=&#34;radio&#34; name=&#34;data[showHideRadio]&#34; id=&#34;ShowHideRadio2&#34; value=&#34;2&#34; checked=&#34;checked&#34;&gt;</code>
+      </div>
+      
+      <div class="violation">
+        <h3>landmark-banner-is-top-level: Banner landmark should not be contained in another landmark</h3>
+        <p>Impact: moderate</p>
+        <p>Ensures the banner landmark is at top level</p>
+        <h4>HTML Location:</h4>
+        <code>&lt;div id=&#34;header&#34; role=&#34;banner&#34;&gt;</code>
+      </div>
+      
+      <div class="violation">
+        <h3>landmark-no-duplicate-contentinfo: Document should not have more than one contentinfo landmark</h3>
+        <p>Impact: moderate</p>
+        <p>Ensures the document has at most one contentinfo landmark</p>
+        <h4>HTML Location:</h4>
+        <code>&lt;div id=&#34;footer&#34; role=&#34;contentinfo&#34;&gt;</code>
+      </div>
+      
+      <div class="violation">
+        <h3>landmark-unique: Ensures landmarks are unique</h3>
+        <p>Impact: moderate</p>
+        <p>Landmarks should have a unique role or role/label/title (i.e. accessible name) combination</p>
+        <h4>HTML Location:</h4>
+        <code>&lt;div id=&#34;footer&#34; role=&#34;contentinfo&#34;&gt;</code>
+      </div>
+      
+      <div class="violation">
+        <h3>link-name: Links must have discernible text</h3>
+        <p>Impact: serious</p>
+        <p>Ensures links have discernible text</p>
+        <h4>HTML Location:</h4>
+        <code>&lt;a href=&#34;/&#34;&gt;&lt;img src=&#34;/theme/archivesonline/img/logo.png?1736215631&#34; title=&#34;&#34; alt=&#34;&#34;&gt;&lt;/a&gt;</code>
       </div>
        
     </section>
@@ -3268,27 +3492,59 @@
       <h2>https://archivesonline.wcc.govt.nz/nodes/view/868960</h2>
        
       <div class="violation">
-        <h3>image-redundant-alt: Alternative text of images should not be repeated as text</h3>
-        <p>Impact: minor</p>
-        <p>Ensure image alternative is not repeated as text</p>
+        <h3>color-contrast: Elements must have sufficient color contrast</h3>
+        <p>Impact: serious</p>
+        <p>Ensures the contrast between foreground and background colors meets WCAG 2 AA contrast ratio thresholds</p>
         <h4>HTML Location:</h4>
-        <code>&lt;img src=&#34;data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOSIgaGVpZ2h0PSIxNCIgdmlld0JveD0iMCAwIDkgMTQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+IDxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMS43ODQ2NyAwTDAuNTAwMjA1IDEuMjg0NDZMNi4yMTUwMyA3TDAuNTAwMjA1IDEyLjcxNTVMMS43ODQ2NyAxNEw4Ljc4NDY3IDdMMS43ODQ2NyAwWiIgZmlsbD0iYmxhY2siLz4gPC9zdmc+IA==&#34; alt=&#34;begin&#34; style=&#34;margin-left: 5px;&#34;&gt;</code>
+        <code>&lt;a href=&#34;https://archivesonline.wcc.govt.nz/nodes/view/1785&#34;&gt;WCC, City Photographer&#39;s photographic negatives&lt;/a&gt;</code>
       </div>
       
       <div class="violation">
-        <h3>landmark-one-main: Document should have one main landmark</h3>
+        <h3>heading-order: Heading levels should only increase by one</h3>
         <p>Impact: moderate</p>
-        <p>Ensures the document has a main landmark</p>
+        <p>Ensures the order of headings is semantically correct</p>
         <h4>HTML Location:</h4>
-        <code>&lt;html lang=&#34;en&#34;&gt;</code>
+        <code>&lt;div role=&#34;heading&#34; aria-level=&#34;3&#34; class=&#34;portlet-header&#34;&gt;&lt;span class=&#34;expandcolapse sprite&#34;&gt;&lt;/span&gt;Descriptive Data&lt;/div&gt;</code>
       </div>
       
       <div class="violation">
-        <h3>region: All page content should be contained by landmarks</h3>
-        <p>Impact: moderate</p>
-        <p>Ensures all page content is contained by landmarks</p>
+        <h3>label: Form elements must have labels</h3>
+        <p>Impact: critical</p>
+        <p>Ensures every form element has a label</p>
         <h4>HTML Location:</h4>
-        <code>&lt;div&gt;&lt;h1 style=&#34;font-weight: normal; color: rgb(221, 107, 16);&#34;&gt;Let&#39;s confirm you are human&lt;/h1&gt;&lt;/div&gt;</code>
+        <code>&lt;input type=&#34;radio&#34; name=&#34;data[showHideRadio]&#34; id=&#34;ShowHideRadio2&#34; value=&#34;2&#34; checked=&#34;checked&#34;&gt;</code>
+      </div>
+      
+      <div class="violation">
+        <h3>landmark-banner-is-top-level: Banner landmark should not be contained in another landmark</h3>
+        <p>Impact: moderate</p>
+        <p>Ensures the banner landmark is at top level</p>
+        <h4>HTML Location:</h4>
+        <code>&lt;div id=&#34;header&#34; role=&#34;banner&#34;&gt;</code>
+      </div>
+      
+      <div class="violation">
+        <h3>landmark-no-duplicate-contentinfo: Document should not have more than one contentinfo landmark</h3>
+        <p>Impact: moderate</p>
+        <p>Ensures the document has at most one contentinfo landmark</p>
+        <h4>HTML Location:</h4>
+        <code>&lt;div id=&#34;footer&#34; role=&#34;contentinfo&#34;&gt;</code>
+      </div>
+      
+      <div class="violation">
+        <h3>landmark-unique: Ensures landmarks are unique</h3>
+        <p>Impact: moderate</p>
+        <p>Landmarks should have a unique role or role/label/title (i.e. accessible name) combination</p>
+        <h4>HTML Location:</h4>
+        <code>&lt;div id=&#34;footer&#34; role=&#34;contentinfo&#34;&gt;</code>
+      </div>
+      
+      <div class="violation">
+        <h3>link-name: Links must have discernible text</h3>
+        <p>Impact: serious</p>
+        <p>Ensures links have discernible text</p>
+        <h4>HTML Location:</h4>
+        <code>&lt;a href=&#34;/&#34;&gt;&lt;img src=&#34;/theme/archivesonline/img/logo.png?1736215631&#34; title=&#34;&#34; alt=&#34;&#34;&gt;&lt;/a&gt;</code>
       </div>
        
     </section>
@@ -3297,27 +3553,59 @@
       <h2>https://archivesonline.wcc.govt.nz/nodes/view/809194</h2>
        
       <div class="violation">
-        <h3>image-redundant-alt: Alternative text of images should not be repeated as text</h3>
-        <p>Impact: minor</p>
-        <p>Ensure image alternative is not repeated as text</p>
+        <h3>color-contrast: Elements must have sufficient color contrast</h3>
+        <p>Impact: serious</p>
+        <p>Ensures the contrast between foreground and background colors meets WCAG 2 AA contrast ratio thresholds</p>
         <h4>HTML Location:</h4>
-        <code>&lt;img src=&#34;data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOSIgaGVpZ2h0PSIxNCIgdmlld0JveD0iMCAwIDkgMTQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+IDxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMS43ODQ2NyAwTDAuNTAwMjA1IDEuMjg0NDZMNi4yMTUwMyA3TDAuNTAwMjA1IDEyLjcxNTVMMS43ODQ2NyAxNEw4Ljc4NDY3IDdMMS43ODQ2NyAwWiIgZmlsbD0iYmxhY2siLz4gPC9zdmc+IA==&#34; alt=&#34;begin&#34; style=&#34;margin-left: 5px;&#34;&gt;</code>
+        <code>&lt;a href=&#34;https://archivesonline.wcc.govt.nz/nodes/view/1882&#34;&gt;WCC, Milk Department Memorabilia&lt;/a&gt;</code>
       </div>
       
       <div class="violation">
-        <h3>landmark-one-main: Document should have one main landmark</h3>
+        <h3>heading-order: Heading levels should only increase by one</h3>
         <p>Impact: moderate</p>
-        <p>Ensures the document has a main landmark</p>
+        <p>Ensures the order of headings is semantically correct</p>
         <h4>HTML Location:</h4>
-        <code>&lt;html lang=&#34;en&#34;&gt;</code>
+        <code>&lt;div role=&#34;heading&#34; aria-level=&#34;3&#34; class=&#34;portlet-header&#34;&gt;&lt;span class=&#34;expandcolapse sprite&#34;&gt;&lt;/span&gt;Descriptive Data&lt;/div&gt;</code>
       </div>
       
       <div class="violation">
-        <h3>region: All page content should be contained by landmarks</h3>
-        <p>Impact: moderate</p>
-        <p>Ensures all page content is contained by landmarks</p>
+        <h3>label: Form elements must have labels</h3>
+        <p>Impact: critical</p>
+        <p>Ensures every form element has a label</p>
         <h4>HTML Location:</h4>
-        <code>&lt;div&gt;&lt;h1 style=&#34;font-weight: normal; color: rgb(221, 107, 16);&#34;&gt;Let&#39;s confirm you are human&lt;/h1&gt;&lt;/div&gt;</code>
+        <code>&lt;input type=&#34;radio&#34; name=&#34;data[showHideRadio]&#34; id=&#34;ShowHideRadio2&#34; value=&#34;2&#34; checked=&#34;checked&#34;&gt;</code>
+      </div>
+      
+      <div class="violation">
+        <h3>landmark-banner-is-top-level: Banner landmark should not be contained in another landmark</h3>
+        <p>Impact: moderate</p>
+        <p>Ensures the banner landmark is at top level</p>
+        <h4>HTML Location:</h4>
+        <code>&lt;div id=&#34;header&#34; role=&#34;banner&#34;&gt;</code>
+      </div>
+      
+      <div class="violation">
+        <h3>landmark-no-duplicate-contentinfo: Document should not have more than one contentinfo landmark</h3>
+        <p>Impact: moderate</p>
+        <p>Ensures the document has at most one contentinfo landmark</p>
+        <h4>HTML Location:</h4>
+        <code>&lt;div id=&#34;footer&#34; role=&#34;contentinfo&#34;&gt;</code>
+      </div>
+      
+      <div class="violation">
+        <h3>landmark-unique: Ensures landmarks are unique</h3>
+        <p>Impact: moderate</p>
+        <p>Landmarks should have a unique role or role/label/title (i.e. accessible name) combination</p>
+        <h4>HTML Location:</h4>
+        <code>&lt;div id=&#34;footer&#34; role=&#34;contentinfo&#34;&gt;</code>
+      </div>
+      
+      <div class="violation">
+        <h3>link-name: Links must have discernible text</h3>
+        <p>Impact: serious</p>
+        <p>Ensures links have discernible text</p>
+        <h4>HTML Location:</h4>
+        <code>&lt;a href=&#34;/&#34;&gt;&lt;img src=&#34;/theme/archivesonline/img/logo.png?1736215631&#34; title=&#34;&#34; alt=&#34;&#34;&gt;&lt;/a&gt;</code>
       </div>
        
     </section>
@@ -3326,27 +3614,59 @@
       <h2>https://archivesonline.wcc.govt.nz/nodes/view/681606</h2>
        
       <div class="violation">
-        <h3>image-redundant-alt: Alternative text of images should not be repeated as text</h3>
-        <p>Impact: minor</p>
-        <p>Ensure image alternative is not repeated as text</p>
+        <h3>color-contrast: Elements must have sufficient color contrast</h3>
+        <p>Impact: serious</p>
+        <p>Ensures the contrast between foreground and background colors meets WCAG 2 AA contrast ratio thresholds</p>
         <h4>HTML Location:</h4>
-        <code>&lt;img src=&#34;data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOSIgaGVpZ2h0PSIxNCIgdmlld0JveD0iMCAwIDkgMTQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+IDxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMS43ODQ2NyAwTDAuNTAwMjA1IDEuMjg0NDZMNi4yMTUwMyA3TDAuNTAwMjA1IDEyLjcxNTVMMS43ODQ2NyAxNEw4Ljc4NDY3IDdMMS43ODQ2NyAwWiIgZmlsbD0iYmxhY2siLz4gPC9zdmc+IA==&#34; alt=&#34;begin&#34; style=&#34;margin-left: 5px;&#34;&gt;</code>
+        <code>&lt;a href=&#34;https://archivesonline.wcc.govt.nz/nodes/view/687775&#34; class=&#34;pclevel1&#34; title=&#34;Copies of Oil Painting and sketch of Cemetery Piazza&#34;&gt;Copies of Oil Painting a...&lt;/a&gt;</code>
       </div>
       
       <div class="violation">
-        <h3>landmark-one-main: Document should have one main landmark</h3>
+        <h3>heading-order: Heading levels should only increase by one</h3>
         <p>Impact: moderate</p>
-        <p>Ensures the document has a main landmark</p>
+        <p>Ensures the order of headings is semantically correct</p>
         <h4>HTML Location:</h4>
-        <code>&lt;html lang=&#34;en&#34;&gt;</code>
+        <code>&lt;div role=&#34;heading&#34; aria-level=&#34;3&#34; class=&#34;portlet-header&#34;&gt;&lt;span class=&#34;expandcolapse sprite&#34;&gt;&lt;/span&gt;Descriptive Data&lt;/div&gt;</code>
       </div>
       
       <div class="violation">
-        <h3>region: All page content should be contained by landmarks</h3>
-        <p>Impact: moderate</p>
-        <p>Ensures all page content is contained by landmarks</p>
+        <h3>label: Form elements must have labels</h3>
+        <p>Impact: critical</p>
+        <p>Ensures every form element has a label</p>
         <h4>HTML Location:</h4>
-        <code>&lt;div&gt;&lt;h1 style=&#34;font-weight: normal; color: rgb(221, 107, 16);&#34;&gt;Let&#39;s confirm you are human&lt;/h1&gt;&lt;/div&gt;</code>
+        <code>&lt;input type=&#34;radio&#34; name=&#34;data[showHideRadio]&#34; id=&#34;ShowHideRadio2&#34; value=&#34;2&#34; checked=&#34;checked&#34;&gt;</code>
+      </div>
+      
+      <div class="violation">
+        <h3>landmark-banner-is-top-level: Banner landmark should not be contained in another landmark</h3>
+        <p>Impact: moderate</p>
+        <p>Ensures the banner landmark is at top level</p>
+        <h4>HTML Location:</h4>
+        <code>&lt;div id=&#34;header&#34; role=&#34;banner&#34;&gt;</code>
+      </div>
+      
+      <div class="violation">
+        <h3>landmark-no-duplicate-contentinfo: Document should not have more than one contentinfo landmark</h3>
+        <p>Impact: moderate</p>
+        <p>Ensures the document has at most one contentinfo landmark</p>
+        <h4>HTML Location:</h4>
+        <code>&lt;div id=&#34;footer&#34; role=&#34;contentinfo&#34;&gt;</code>
+      </div>
+      
+      <div class="violation">
+        <h3>landmark-unique: Ensures landmarks are unique</h3>
+        <p>Impact: moderate</p>
+        <p>Landmarks should have a unique role or role/label/title (i.e. accessible name) combination</p>
+        <h4>HTML Location:</h4>
+        <code>&lt;div id=&#34;footer&#34; role=&#34;contentinfo&#34;&gt;</code>
+      </div>
+      
+      <div class="violation">
+        <h3>link-name: Links must have discernible text</h3>
+        <p>Impact: serious</p>
+        <p>Ensures links have discernible text</p>
+        <h4>HTML Location:</h4>
+        <code>&lt;a href=&#34;/&#34;&gt;&lt;img src=&#34;/theme/archivesonline/img/logo.png?1736215631&#34; title=&#34;&#34; alt=&#34;&#34;&gt;&lt;/a&gt;</code>
       </div>
        
     </section>
