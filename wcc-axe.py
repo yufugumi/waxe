@@ -1,53 +1,54 @@
-import csv
 from playwright.sync_api import sync_playwright
 from axe_core_python.sync_playwright import Axe
 from tqdm import tqdm
 from datetime import datetime
+from jinja2 import Template
+import html
 
 axe = Axe()
-
-# Get current date
 now = datetime.now()
 date_string = now.strftime("%d-%m-%Y")
+test_name="wellington-govt-nz"
 
-# Open the CSV file for writing
-filename = f'accessibility-report-wellington.csv'
-with open(filename, 'w', newline='') as file:
-    writer = csv.writer(file)
-    writer.writerow(["URL", "Violations", "Status of issue", "Comment"])
+# Store results in a list
+results = []
 
-    # Read the URLs from the file
-    with open('urls.txt', 'r') as url_file:
-        urls = [url.strip() for url in url_file]  # Remove any trailing newline and store URLs
+# Read template
+with open('template.html') as f:
+    template = Template(f.read())
 
-    # Use tqdm to wrap around urls for progress bar
-    with sync_playwright() as playwright:
-        browser = playwright.chromium.launch()
+with open('urls.txt', 'r') as url_file:
+    urls = [url.strip() for url in url_file]
 
-        for url in tqdm(urls):
-            try:
-                page = browser.new_page()
-                # Set a generous timeout for navigation if the sites are slow to load
-                page.goto(url, timeout=60000)
-                result = axe.run(page)
-                violations = result.get('violations', [])
+with sync_playwright() as playwright:
+    browser = playwright.chromium.launch()
+
+    for url in tqdm(urls):
+        try:
+            page = browser.new_page()
+            page.goto(url, timeout=60000)
+            result = axe.run(page)
+            results.append((url, result.get('violations', [])))
+            
+            if result.get('violations'):
+                tqdm.write(f"{len(result['violations'])} violations found on {url}")
+            else:
+                tqdm.write(f"No violations found on {url}")
                 
-                if violations:
-                    # If violations are found, write them to the CSV file
-                    writer.writerow([url, ', '.join([str(v) for v in violations]), "", ""])
-                    tqdm.write(f"{len(violations)} violations found on {url}")
-                else:
-                    # If no violations are found, write an empty row with the URL
-                    writer.writerow([url, "", "", ""])
-                    tqdm.write(f"No violations found on {url}")
-                    
-            except Exception as e:
-                # Handle exceptions, like timeouts, and log them
-                tqdm.write(f"Timeout or other error occurred while visiting {url}: {e}")
-                # Write an empty row with the URL and an error comment
-                writer.writerow([url, "", "", f"Error: {e}"])
-            finally:
-                # Ensure the page is closed after each iteration
-                page.close()
-                
-        browser.close()
+        except Exception as e:
+            tqdm.write(f"Error on {url}: {e}")
+            results.append((url, []))
+        finally:
+            page.close()
+            
+    browser.close()
+
+# Render HTML report
+html_output = template.render(
+    date=date_string, 
+    results=results,
+    test_name="wellington-govt-nz"
+)
+
+with open(f'accessibility-report-{test_name}.html', 'w', encoding='utf-8') as f:
+    f.write(html_output)
