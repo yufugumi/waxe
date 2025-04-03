@@ -31,7 +31,17 @@ jobs:
         with:
           python-version: "3.10"
 
+      - name: Cache pip packages
+        id: pip-cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
       - name: Cache Playwright
+        id: playwright-cache
         uses: actions/cache@v3
         with:
           path: ~/.cache/ms-playwright
@@ -39,29 +49,39 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-playwright-
 
-      - name: Install dependencies
+      - name: Install dependencies (from cache)
+        if: steps.pip-cache.outputs.cache-hit == 'true' && steps.playwright-cache.outputs.cache-hit == 'true'
         run: |
+          echo "Using cached dependencies"
+          python -m pip install --upgrade pip
+          pip install --no-cache-dir -r requirements.txt
+          npx playwright install --with-deps
+
+      - name: Install dependencies (fresh)
+        if: steps.pip-cache.outputs.cache-hit != 'true' || steps.playwright-cache.outputs.cache-hit != 'true'
+        run: |
+          echo "Installing fresh dependencies"
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           playwright install
           playwright install-deps
 
       - name: Generate URLs for wellington.govt.nz
-        run: trafilatura --sitemap -u https://wellington.govt.nz/sitemap.xml --list > urls.txt
+        run: trafilatura --sitemap -u https://wellington.govt.nz/sitemap.xml --list > urls/wellington.txt
 
       - name: Run wellington.govt.nz axe scan
         uses: nick-fields/retry@v2
         with:
           timeout_minutes: 420
           max_attempts: 2
-          command: python wcc-axe.py
+          command: python axe-scanner.py --site wellington
 
       - name: Commit changes
         run: |
           git pull
           git config --global user.name 'GitHub Actions'
           git config --global user.email 'actions@github.com'
-          git add *
+          git add urls/ logs/ reports/
           git commit -m "New a11y report for wellington.govt.nz" || echo "No changes to commit"
           git push
 
@@ -78,7 +98,17 @@ jobs:
         with:
           python-version: "3.10"
 
+      - name: Cache pip packages
+        id: pip-cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
       - name: Cache Playwright
+        id: playwright-cache
         uses: actions/cache@v3
         with:
           path: ~/.cache/ms-playwright
@@ -86,29 +116,39 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-playwright-
 
-      - name: Install dependencies
+      - name: Install dependencies (from cache)
+        if: steps.pip-cache.outputs.cache-hit == 'true' && steps.playwright-cache.outputs.cache-hit == 'true'
         run: |
+          echo "Using cached dependencies"
+          python -m pip install --upgrade pip
+          pip install --no-cache-dir -r requirements.txt
+          npx playwright install --with-deps
+
+      - name: Install dependencies (fresh)
+        if: steps.pip-cache.outputs.cache-hit != 'true' || steps.playwright-cache.outputs.cache-hit != 'true'
+        run: |
+          echo "Installing fresh dependencies"
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           playwright install
           playwright install-deps
 
       - name: Generate URLs for letstalk.wellington.govt.nz
-        run: trafilatura --sitemap -u https://www.letstalk.wellington.govt.nz/sitemap.xml --list > letstalkurls.txt
+        run: trafilatura --sitemap -u https://www.letstalk.wellington.govt.nz/sitemap.xml --list > urls/letstalk.txt
 
       - name: Run letstalk.wellington.govt.nz scan
         uses: nick-fields/retry@v2
         with:
           timeout_minutes: 420
           max_attempts: 2
-          command: python letstalk-axe.py
+          command: python axe-scanner.py --site letstalk
 
       - name: Commit letstalk.wellington.govt.nz changes
         run: |
           git pull
           git config --global user.name 'GitHub Actions'
           git config --global user.email 'actions@github.com'
-          git add *
+          git add urls/ logs/ reports/
           git commit -m "New a11y report for letstalk.wellington.govt.nz" || echo "No changes to commit"
           git push
 
@@ -125,7 +165,17 @@ jobs:
         with:
           python-version: "3.10"
 
+      - name: Cache pip packages
+        id: pip-cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
       - name: Cache Playwright
+        id: playwright-cache
         uses: actions/cache@v3
         with:
           path: ~/.cache/ms-playwright
@@ -133,8 +183,18 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-playwright-
 
-      - name: Install dependencies
+      - name: Install dependencies (from cache)
+        if: steps.pip-cache.outputs.cache-hit == 'true' && steps.playwright-cache.outputs.cache-hit == 'true'
         run: |
+          echo "Using cached dependencies"
+          python -m pip install --upgrade pip
+          pip install --no-cache-dir -r requirements.txt
+          npx playwright install --with-deps
+
+      - name: Install dependencies (fresh)
+        if: steps.pip-cache.outputs.cache-hit != 'true' || steps.playwright-cache.outputs.cache-hit != 'true'
+        run: |
+          echo "Installing fresh dependencies"
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           playwright install
@@ -145,14 +205,14 @@ jobs:
         with:
           timeout_minutes: 420
           max_attempts: 2
-          command: python archives-axe.py
+          command: python axe-scanner.py --site archives
 
       - name: Commit archivesonline.wcc.govt.nz changes
         run: |
           git pull
           git config --global user.name 'GitHub Actions'
           git config --global user.email 'actions@github.com'
-          git add *
+          git add urls/ logs/ reports/
           git commit -m "New a11y report for archivesonline.wcc.govt.nz" || echo "No changes to commit"
           git push
 
@@ -169,8 +229,35 @@ jobs:
         with:
           node-version: "18"
 
-      - name: Install dependencies
+      - name: Cache npm packages
+        id: npm-cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+
+      - name: Cache Playwright for Node
+        id: playwright-node-cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-node-
+
+      - name: Install dependencies (from cache)
+        if: steps.npm-cache.outputs.cache-hit == 'true' && steps.playwright-node-cache.outputs.cache-hit == 'true'
         run: |
+          echo "Using cached Node.js dependencies"
+          npm install --prefer-offline --no-audit
+          npx playwright install --with-deps
+
+      - name: Install dependencies (fresh)
+        if: steps.npm-cache.outputs.cache-hit != 'true' || steps.playwright-node-cache.outputs.cache-hit != 'true'
+        run: |
+          echo "Installing fresh Node.js dependencies"
           npm install @playwright/test
           npm install @axe-core/playwright
           npm install csv-writer
@@ -202,19 +289,19 @@ jobs:
     # Run after all jobs have completed (regardless of success/failure), only on schedule
     if: ${{ always() && (github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && github.event.inputs.scan_filter == 'all')) }}
     needs: [wellington-scan, letstalk-scan, archives-online-scan, tutuki-scan]
-  
+
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Generate tag version
-      id: tag_version
-      run: echo "new_tag=$(date +'v%Y-%m-%d')" >> $GITHUB_OUTPUT
+      - name: Generate tag version
+        id: tag_version
+        run: echo "new_tag=$(date +'v%Y-%m-%d')" >> $GITHUB_OUTPUT
 
-    - name: Create a new release
-      uses: ncipollo/release-action@v1
-      with:
-        tag: ${{ steps.tag_version.outputs.new_tag }}
-        name: Monthly accessibility reports
-        body: New a11y reports for wellington.govt.nz, letstalk.wellington.govt.nz, and Archives online
-        artifacts: "**/*.html"
-        allowUpdates: true
+      - name: Create a new release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ steps.tag_version.outputs.new_tag }}
+          name: Monthly accessibility reports
+          body: New a11y reports for wellington.govt.nz, letstalk.wellington.govt.nz, and Archives online
+          artifacts: "reports/**/*.html"
+          allowUpdates: true
