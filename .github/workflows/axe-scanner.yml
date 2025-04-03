@@ -47,14 +47,14 @@ jobs:
           playwright install-deps
 
       - name: Generate URLs for wellington.govt.nz
-        run: trafilatura --sitemap -u https://wellington.govt.nz/sitemap.xml --list > urls.txt
+        run: trafilatura --sitemap -u https://wellington.govt.nz/sitemap.xml --list > urls/wellington.txt
 
       - name: Run wellington.govt.nz axe scan
         uses: nick-fields/retry@v2
         with:
           timeout_minutes: 420
           max_attempts: 2
-          command: python wcc-axe.py
+          command: python axe-scanner.py --site wellington
 
       - name: Commit changes
         run: |
@@ -94,14 +94,14 @@ jobs:
           playwright install-deps
 
       - name: Generate URLs for letstalk.wellington.govt.nz
-        run: trafilatura --sitemap -u https://www.letstalk.wellington.govt.nz/sitemap.xml --list > letstalkurls.txt
+        run: trafilatura --sitemap -u https://www.letstalk.wellington.govt.nz/sitemap.xml --list > urls/letstalk.txt
 
       - name: Run letstalk.wellington.govt.nz scan
         uses: nick-fields/retry@v2
         with:
           timeout_minutes: 420
           max_attempts: 2
-          command: python letstalk-axe.py
+          command: python axe-scanner.py --site letstalk
 
       - name: Commit letstalk.wellington.govt.nz changes
         run: |
@@ -145,7 +145,7 @@ jobs:
         with:
           timeout_minutes: 420
           max_attempts: 2
-          command: python archives-axe.py
+          command: python axe-scanner.py --site archives
 
       - name: Commit archivesonline.wcc.govt.nz changes
         run: |
@@ -202,19 +202,19 @@ jobs:
     # Run after all jobs have completed (regardless of success/failure), only on schedule
     if: ${{ always() && (github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && github.event.inputs.scan_filter == 'all')) }}
     needs: [wellington-scan, letstalk-scan, archives-online-scan, tutuki-scan]
-  
+
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Generate tag version
-      id: tag_version
-      run: echo "new_tag=$(date +'v%Y-%m-%d')" >> $GITHUB_OUTPUT
+      - name: Generate tag version
+        id: tag_version
+        run: echo "new_tag=$(date +'v%Y-%m-%d')" >> $GITHUB_OUTPUT
 
-    - name: Create a new release
-      uses: ncipollo/release-action@v1
-      with:
-        tag: ${{ steps.tag_version.outputs.new_tag }}
-        name: Monthly accessibility reports
-        body: New a11y reports for wellington.govt.nz, letstalk.wellington.govt.nz, and Archives online
-        artifacts: "**/*.html"
-        allowUpdates: true
+      - name: Create a new release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ steps.tag_version.outputs.new_tag }}
+          name: Monthly accessibility reports
+          body: New a11y reports for wellington.govt.nz, letstalk.wellington.govt.nz, and Archives online
+          artifacts: "**/*.{csv,html}"
+          allowUpdates: true

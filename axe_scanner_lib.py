@@ -1,4 +1,5 @@
 import asyncio
+import os
 from playwright.async_api import async_playwright
 from axe_core_python.async_playwright import Axe
 from tqdm.asyncio import tqdm
@@ -7,16 +8,9 @@ from jinja2 import Template
 import logging
 from typing import List, Dict, Tuple
 
-# Setup logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler("accessibility_scan_archives.log"),
-        logging.StreamHandler()
-    ]
-)
-logger = logging.getLogger(__name__)
+# Ensure required directories exist
+for directory in ['reports', 'logs', 'urls']:
+    os.makedirs(directory, exist_ok=True)
 
 async def process_url(url: str, browser, semaphore, axe: Axe, progress_bar) -> Tuple[str, List[Dict]]:
     """Process a single URL with error handling and retries."""
@@ -98,14 +92,27 @@ async def process_urls(urls: List[str]) -> List[Tuple[str, List[Dict]]]:
             
     return results
 
-async def main():
+async def run_accessibility_scan(url_file: str, test_name: str, log_file: str = "accessibility_scan.log"):
+    """Run an accessibility scan with the specified parameters."""
+    # Setup logging
+    full_log_path = os.path.join('logs', log_file)
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(levelname)s - %(message)s',
+        handlers=[
+            logging.FileHandler(full_log_path),
+            logging.StreamHandler()
+        ]
+    )
+    logger = logging.getLogger(__name__)
+    
     now = datetime.now()
     date_string = now.strftime("%d-%m-%Y")
-    test_name = "archives-online"
     
-    # Read URLs
-    with open('archives.txt', 'r') as url_file:
-        urls = [url.strip() for url in url_file if url.strip()]
+    # Read URLs from urls directory
+    full_url_path = os.path.join('urls', url_file)
+    with open(full_url_path, 'r') as file:
+        urls = [url.strip() for url in file if url.strip()]
         
     logger.info(f"Starting accessibility scan of {len(urls)} URLs")
     
@@ -123,11 +130,10 @@ async def main():
         test_name=test_name
     )
     
-    report_filename = f'accessibility-report-{test_name}.html'
-    with open(report_filename, 'w', encoding='utf-8') as f:
+    # Save report to reports directory
+    report_filename = f'accessibility-report-{test_name}-{date_string}.html'
+    full_report_path = os.path.join('reports', report_filename)
+    with open(full_report_path, 'w', encoding='utf-8') as f:
         f.write(html_output)
         
-    logger.info(f"Accessibility report generated: {report_filename}")
-
-if __name__ == "__main__":
-    asyncio.run(main())
+    logger.info(f"Accessibility report generated: {full_report_path}")
