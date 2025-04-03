@@ -19,7 +19,7 @@ on:
 
 jobs:
   wellington-scan:
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-4vcpu-ubuntu-2204
     timeout-minutes: 800
     if: ${{ github.event.inputs.scan_filter == 'all' || github.event.inputs.scan_filter == 'wellington' || github.event_name == 'schedule' }}
 
@@ -66,7 +66,7 @@ jobs:
           git push
 
   letstalk-scan:
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-4vcpu-ubuntu-2204
     timeout-minutes: 800
     if: ${{ github.event.inputs.scan_filter == 'all' || github.event.inputs.scan_filter == 'letstalk' || github.event_name == 'schedule' }}
 
@@ -113,7 +113,7 @@ jobs:
           git push
 
   archives-online-scan:
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-4vcpu-ubuntu-2204
     timeout-minutes: 800
     if: ${{ github.event.inputs.scan_filter == 'all' || github.event.inputs.scan_filter == 'archives' || github.event_name == 'schedule' }}
 
@@ -157,7 +157,7 @@ jobs:
           git push
 
   tutuki-scan:
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-4vcpu-ubuntu-2204
     timeout-minutes: 60
     if: ${{ github.event.inputs.scan_filter == 'all' || github.event.inputs.scan_filter == 'tutuki' || github.event_name == 'schedule' }}
 
@@ -198,7 +198,7 @@ jobs:
           git push
 
   create-release:
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-4vcpu-ubuntu-2204
     # Run after all jobs have completed (regardless of success/failure), only on schedule
     if: ${{ always() && (github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && github.event.inputs.scan_filter == 'all')) }}
     needs: [wellington-scan, letstalk-scan, archives-online-scan, tutuki-scan]
