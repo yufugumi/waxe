@@ -5,7 +5,7 @@ from axe_scanner_lib import run_accessibility_scan
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Run accessibility scans')
     parser.add_argument('--site', type=str, required=True, 
-                        choices=['wellington', 'letstalk', 'archives'],
+                        choices=['wellington', 'letstalk', 'archives', 'transportprojects'],
                         help='Which site to scan')
     
     args = parser.parse_args()
@@ -26,6 +26,11 @@ if __name__ == "__main__":
             'url_file': 'archives.txt',
             'test_name': 'archives-online',
             'log_file': 'archives.log'
+        },
+        'transportprojects': {
+            'url_file': 'trasnportprojects.txt',
+            'test_name': 'transportprojects',
+            'log_file': 'transportprojects.log'
         }
     }
     
