@@ -19,7 +19,7 @@ on:
 
 jobs:
   wellington-scan:
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-8vcpu-ubuntu-2204
     timeout-minutes: 800
     if: ${{ github.event.inputs.scan_filter == 'all' || github.event.inputs.scan_filter == 'wellington' || github.event_name == 'schedule' }}
 
@@ -27,13 +27,13 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: useblacksmith/setup-python@v6
         with:
           python-version: "3.10"
 
       - name: Cache pip packages
         id: pip-cache
-        uses: actions/cache@v3
+        uses: useblacksmith/cache@v5
         with:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
@@ -42,7 +42,7 @@ jobs:
 
       - name: Cache Playwright
         id: playwright-cache
-        uses: actions/cache@v3
+        uses: useblacksmith/cache@v5
         with:
           path: ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-${{ hashFiles('**/requirements.txt') }}
@@ -86,7 +86,7 @@ jobs:
           git push
 
   letstalk-scan:
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-4vcpu-ubuntu-2204
     timeout-minutes: 800
     if: ${{ github.event.inputs.scan_filter == 'all' || github.event.inputs.scan_filter == 'letstalk' || github.event_name == 'schedule' }}
 
@@ -94,13 +94,13 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: useblacksmith/setup-python@v6
         with:
           python-version: "3.10"
 
       - name: Cache pip packages
         id: pip-cache
-        uses: actions/cache@v3
+        uses: useblacksmith/cache@v5
         with:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
@@ -109,7 +109,7 @@ jobs:
 
       - name: Cache Playwright
         id: playwright-cache
-        uses: actions/cache@v3
+        uses: useblacksmith/cache@v5
         with:
           path: ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-${{ hashFiles('**/requirements.txt') }}
@@ -153,7 +153,7 @@ jobs:
           git push
 
   archives-online-scan:
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-2vcpu-ubuntu-2204
     timeout-minutes: 800
     if: ${{ github.event.inputs.scan_filter == 'all' || github.event.inputs.scan_filter == 'archives' || github.event_name == 'schedule' }}
 
@@ -161,13 +161,13 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: useblacksmith/setup-python@v6
         with:
           python-version: "3.10"
 
       - name: Cache pip packages
         id: pip-cache
-        uses: actions/cache@v3
+        uses: useblacksmith/cache@v5
         with:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
@@ -176,7 +176,7 @@ jobs:
 
       - name: Cache Playwright
         id: playwright-cache
-        uses: actions/cache@v3
+        uses: useblacksmith/cache@v5
         with:
           path: ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-${{ hashFiles('**/requirements.txt') }}
@@ -217,7 +217,7 @@ jobs:
           git push
 
   tutuki-scan:
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-2vcpu-ubuntu-2204
     timeout-minutes: 60
     if: ${{ github.event.inputs.scan_filter == 'all' || github.event.inputs.scan_filter == 'tutuki' || github.event_name == 'schedule' }}
 
@@ -225,13 +225,13 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: useblacksmith/setup-node@v5
         with:
           node-version: "18"
 
       - name: Cache npm packages
         id: npm-cache
-        uses: actions/cache@v3
+        uses: useblacksmith/cache@v5
         with:
           path: ~/.npm
           key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
@@ -240,7 +240,7 @@ jobs:
 
       - name: Cache Playwright for Node
         id: playwright-node-cache
-        uses: actions/cache@v3
+        uses: useblacksmith/cache@v5
         with:
           path: ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-node-${{ hashFiles('**/package-lock.json') }}
