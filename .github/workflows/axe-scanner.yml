@@ -81,7 +81,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: wellington-a11y-reports
-          path: reports/wellington/**
+          path: reports/accessibility-report-wellington-govt-nz-*.html
           retention-days: 30
 
       - name: Commit changes
@@ -156,7 +156,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: letstalk-a11y-reports
-          path: reports/letstalk/**
+          path: reports/accessibility-report-lets-talk-*.html
           retention-days: 30
 
       - name: Commit letstalk.wellington.govt.nz changes
@@ -228,7 +228,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: archives-a11y-reports
-          path: reports/archives/**
+          path: reports/accessibility-report-archives-online-*.html
           retention-days: 30
 
       - name: Commit archivesonline.wcc.govt.nz changes
