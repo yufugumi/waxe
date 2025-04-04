@@ -5,7 +5,7 @@ from axe_scanner_lib import run_accessibility_scan
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Run accessibility scans')
     parser.add_argument('--site', type=str, required=True, 
-                        choices=['wellington', 'letstalk', 'archives', 'transportprojects'],
+                        choices=['wellington', 'letstalk', 'archives', 'transportprojects', 'careers'],
                         help='Which site to scan')
     
     args = parser.parse_args()
