@@ -469,6 +469,7 @@ jobs:
         archives-online-scan,
         tutuki-scan,
         transportprojects-scan,
+        careers-scan,
       ]
 
     steps:
