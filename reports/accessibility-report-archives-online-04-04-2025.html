@@ -112,7 +112,7 @@
         <p>Impact: moderate</p>
         <p>Ensures the order of headings is semantically correct</p>
         <h4>HTML Location:</h4>
-        <code>&lt;h4&gt;[TSMV Maheno and Marama] Upper and main deck&lt;/h4&gt;</code>
+        <code>&lt;h4&gt;[TSMV Maheno and Marama] General arrangement&lt;/h4&gt;</code>
       </div>
       
       <div class="violation">
@@ -4277,27 +4277,43 @@
       <h2>https://archivesonline.wcc.govt.nz/nodes/view/886730</h2>
        
       <div class="violation">
-        <h3>image-redundant-alt: Alternative text of images should not be repeated as text</h3>
-        <p>Impact: minor</p>
-        <p>Ensure image alternative is not repeated as text</p>
+        <h3>heading-order: Heading levels should only increase by one</h3>
+        <p>Impact: moderate</p>
+        <p>Ensures the order of headings is semantically correct</p>
         <h4>HTML Location:</h4>
-        <code>&lt;img src=&#34;data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOSIgaGVpZ2h0PSIxNCIgdmlld0JveD0iMCAwIDkgMTQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+IDxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMS43ODQ2NyAwTDAuNTAwMjA1IDEuMjg0NDZMNi4yMTUwMyA3TDAuNTAwMjA1IDEyLjcxNTVMMS43ODQ2NyAxNEw4Ljc4NDY3IDdMMS43ODQ2NyAwWiIgZmlsbD0iYmxhY2siLz4gPC9zdmc+IA==&#34; alt=&#34;begin&#34; style=&#34;margin-left: 5px;&#34;&gt;</code>
+        <code>&lt;div role=&#34;heading&#34; aria-level=&#34;3&#34; class=&#34;portlet-header&#34;&gt;&lt;span class=&#34;expandcolapse sprite&#34;&gt;&lt;/span&gt;Descriptive Data&lt;/div&gt;</code>
       </div>
       
       <div class="violation">
-        <h3>landmark-one-main: Document should have one main landmark</h3>
+        <h3>landmark-banner-is-top-level: Banner landmark should not be contained in another landmark</h3>
         <p>Impact: moderate</p>
-        <p>Ensures the document has a main landmark</p>
+        <p>Ensures the banner landmark is at top level</p>
         <h4>HTML Location:</h4>
-        <code>&lt;html lang=&#34;en&#34;&gt;</code>
+        <code>&lt;div id=&#34;header&#34; role=&#34;banner&#34;&gt;</code>
       </div>
       
       <div class="violation">
-        <h3>region: All page content should be contained by landmarks</h3>
+        <h3>landmark-no-duplicate-contentinfo: Document should not have more than one contentinfo landmark</h3>
         <p>Impact: moderate</p>
-        <p>Ensures all page content is contained by landmarks</p>
+        <p>Ensures the document has at most one contentinfo landmark</p>
         <h4>HTML Location:</h4>
-        <code>&lt;div&gt;&lt;h1 style=&#34;font-weight: normal; color: rgb(221, 107, 16);&#34;&gt;Let&#39;s confirm you are human&lt;/h1&gt;&lt;/div&gt;</code>
+        <code>&lt;div id=&#34;footer&#34; role=&#34;contentinfo&#34;&gt;</code>
+      </div>
+      
+      <div class="violation">
+        <h3>landmark-unique: Ensures landmarks are unique</h3>
+        <p>Impact: moderate</p>
+        <p>Landmarks should have a unique role or role/label/title (i.e. accessible name) combination</p>
+        <h4>HTML Location:</h4>
+        <code>&lt;div id=&#34;footer&#34; role=&#34;contentinfo&#34;&gt;</code>
+      </div>
+      
+      <div class="violation">
+        <h3>link-name: Links must have discernible text</h3>
+        <p>Impact: serious</p>
+        <p>Ensures links have discernible text</p>
+        <h4>HTML Location:</h4>
+        <code>&lt;a href=&#34;/&#34;&gt;&lt;img src=&#34;/theme/archivesonline/img/logo.png?1736215631&#34; title=&#34;&#34; alt=&#34;&#34;&gt;&lt;/a&gt;</code>
       </div>
        
     </section>
