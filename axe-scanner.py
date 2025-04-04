@@ -28,7 +28,7 @@ if __name__ == "__main__":
             'log_file': 'archives.log'
         },
         'transportprojects': {
-            'url_file': 'trasnportprojects.txt',
+            'url_file': 'transportprojects.txt',
             'test_name': 'transportprojects',
             'log_file': 'transportprojects.log'
         },
