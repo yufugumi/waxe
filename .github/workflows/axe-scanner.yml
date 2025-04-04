@@ -437,6 +437,7 @@ jobs:
             - letstalk.wellington.govt.nz
             - Archives online
             - Tutuki services
+            - Transport projects
           artifacts: "./release-files/*"
           artifactErrorsFailBuild: true
           allowUpdates: true
