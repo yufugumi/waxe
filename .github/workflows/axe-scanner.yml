@@ -238,7 +238,7 @@ jobs:
           git push
 
   archives-online-scan:
-    runs-on: blacksmith-2vcpu-ubuntu-2204
+    runs-on: blacksmith-4vcpu-ubuntu-2204
     timeout-minutes: 800
     if: ${{ github.event.inputs.scan_filter == 'all' || github.event.inputs.scan_filter == 'archives' || github.event_name == 'schedule' }}
 
@@ -284,6 +284,9 @@ jobs:
           pip install -r requirements.txt
           playwright install
           playwright install-deps
+
+      - name: Generate URLs for archivesonline.wcc.govt.nz (capped)
+        run: npx sikemap https://archivesonline.wcc.govt.nz --max 400 --output urls/archives.txt
 
       - name: Run archivesonline.wcc.govt.nz scan
         uses: nick-fields/retry@v2
