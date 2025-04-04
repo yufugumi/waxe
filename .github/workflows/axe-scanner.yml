@@ -76,6 +76,14 @@ jobs:
           max_attempts: 2
           command: python axe-scanner.py --site wellington
 
+      - name: Upload wellington scan results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: wellington-a11y-reports
+          path: reports/wellington/**
+          retention-days: 30
+
       - name: Commit changes
         run: |
           git pull
@@ -143,6 +151,14 @@ jobs:
           max_attempts: 2
           command: python axe-scanner.py --site letstalk
 
+      - name: Upload letstalk scan results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: letstalk-a11y-reports
+          path: reports/letstalk/**
+          retention-days: 30
+
       - name: Commit letstalk.wellington.govt.nz changes
         run: |
           git pull
@@ -206,6 +222,14 @@ jobs:
           timeout_minutes: 420
           max_attempts: 2
           command: python axe-scanner.py --site archives
+
+      - name: Upload archives scan results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: archives-a11y-reports
+          path: reports/archives/**
+          retention-days: 30
 
       - name: Commit archivesonline.wcc.govt.nz changes
         run: |
@@ -293,15 +317,31 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: all-artifacts
+
+      - name: Display artifact structure
+        run: find all-artifacts -type f | sort
+
       - name: Generate tag version
         id: tag_version
         run: echo "new_tag=$(date +'v%Y-%m-%d')" >> $GITHUB_OUTPUT
+
+      - name: Prepare release assets directory
+        run: |
+          mkdir -p release-assets
+          cp -r all-artifacts/wellington-a11y-reports/* release-assets/ || true
+          cp -r all-artifacts/letstalk-a11y-reports/* release-assets/ || true
+          cp -r all-artifacts/archives-a11y-reports/* release-assets/ || true
+          cp -r all-artifacts/tutuki-accessibility-results/* release-assets/ || true
 
       - name: Create a new release
         uses: ncipollo/release-action@v1
         with:
           tag: ${{ steps.tag_version.outputs.new_tag }}
           name: Monthly accessibility reports
-          body: New a11y reports for wellington.govt.nz, letstalk.wellington.govt.nz, and Archives online
-          artifacts: "reports/**/*.html"
+          body: New a11y reports for wellington.govt.nz, letstalk.wellington.govt.nz, Archives online, and Tutuki services
+          artifacts: "release-assets/**"
           allowUpdates: true
