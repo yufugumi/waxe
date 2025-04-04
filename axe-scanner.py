@@ -31,6 +31,11 @@ if __name__ == "__main__":
             'url_file': 'trasnportprojects.txt',
             'test_name': 'transportprojects',
             'log_file': 'transportprojects.log'
+        },
+        'careers': {
+            'url_file': 'careers.txt',
+            'test_name': 'careers',
+            'log_file': 'careers.log'
         }
     }
     
