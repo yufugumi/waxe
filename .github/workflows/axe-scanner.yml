@@ -316,6 +316,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Download all artifacts
         uses: actions/download-artifact@v4
@@ -327,21 +329,39 @@ jobs:
 
       - name: Generate tag version
         id: tag_version
-        run: echo "new_tag=$(date +'v%Y-%m-%d')" >> $GITHUB_OUTPUT
-
-      - name: Prepare release assets directory
         run: |
-          mkdir -p release-assets
-          cp -r all-artifacts/wellington-a11y-reports/* release-assets/ || true
-          cp -r all-artifacts/letstalk-a11y-reports/* release-assets/ || true
-          cp -r all-artifacts/archives-a11y-reports/* release-assets/ || true
-          cp -r all-artifacts/tutuki-accessibility-results/* release-assets/ || true
+          DATE=$(date +'%Y-%m-%d')
+          echo "new_tag=v${DATE}" >> $GITHUB_OUTPUT
+          echo "date=${DATE}" >> $GITHUB_OUTPUT
+
+      - name: Prepare release files
+        run: |
+          # Create release directory
+          mkdir -p release-files
+
+          # Find the latest report files for each site
+          find all-artifacts -type f -name "*.html" -o -name "*.csv" -o -name "*.json" | while read file; do
+            # Copy individual files to the release files directory with a flattened structure
+            cp "$file" release-files/
+          done
+
+          # List what we're about to release
+          echo "Files to be released:"
+          ls -la release-files/
 
       - name: Create a new release
         uses: ncipollo/release-action@v1
         with:
           tag: ${{ steps.tag_version.outputs.new_tag }}
-          name: Monthly accessibility reports
-          body: New a11y reports for wellington.govt.nz, letstalk.wellington.govt.nz, Archives online, and Tutuki services
-          artifacts: "release-assets/**"
+          name: "Monthly accessibilty reports"
+          body: |
+            # Reports - ${{ steps.tag_version.outputs.date }}
+
+            These reports include automated accessibility scan results for:
+            - wellington.govt.nz
+            - letstalk.wellington.govt.nz
+            - Archives online
+            - Tutuki services
+          artifacts: "./release-files/*"
+          artifactErrorsFailBuild: true
           allowUpdates: true
