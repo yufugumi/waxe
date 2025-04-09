@@ -1,5 +1,8 @@
 name: Monthly accessibility scans
 
+env:
+  SCAN_TIMESTAMP: ${{ github.run_id }}-${{ github.run_number }}
+
 on:
   schedule:
     - cron: "0 0 1 * *"
@@ -82,7 +85,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: wellington-a11y-reports
+          name: wellington-a11y-reports-${{ env.SCAN_TIMESTAMP }}
           path: reports/accessibility-report-wellington-govt-nz-*.html
           retention-days: 30
 
@@ -501,9 +504,10 @@ jobs:
           mkdir -p release-files
 
           # Find the latest report files for each site
-          find all-artifacts -type f -name "*.html" -o -name "*.csv" -o -name "*.json" | while read file; do
-            # Copy individual files to the release files directory with a flattened structure
-            cp "$file" release-files/
+          find all-artifacts -type f -name "*${{ env.SCAN_TIMESTAMP }}*" | while read file; do
+
+            filename=$(basename "$file" | sed "s/-${{ env.SCAN_TIMESTAMP }}//")
+            cp "$file" "release-files/$filename"
           done
 
           # List what we're about to release
