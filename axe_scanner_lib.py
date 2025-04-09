@@ -26,12 +26,50 @@ async def process_url(url: str, browser, semaphore, axe: Axe, progress_bar) -> T
                 )
                 
                 try:
+                    # Block Google Analytics and GTM requests
+                    await context.route('**/*google-analytics*', lambda route: route.abort())
+                    await context.route('**/*googletagmanager*', lambda route: route.abort())
+                    await context.route('**/*gtm.js*', lambda route: route.abort())
+                    await context.route('**/*analytics.js*', lambda route: route.abort())
+                    await context.route('**/*ga.js*', lambda route: route.abort())
+                    
                     page = await context.new_page()
                     await page.goto(url, timeout=30000, wait_until='networkidle')
                     
+                    # Add code to block GTM iframes
+                    await page.add_script_tag(content='''
+                    (function() {
+                        const removeGTMIframes = () => {
+                            const iframes = document.querySelectorAll('iframe');
+                            iframes.forEach(iframe => {
+                                if (iframe.src && (
+                                    iframe.src.includes('googletagmanager') || 
+                                    iframe.src.includes('gtm') ||
+                                    iframe.src.includes('google-analytics')
+                                )) {
+                                    iframe.remove();
+                                }
+                            });
+                        };
+                        
+                        removeGTMIframes();
+                        
+                        const observer = new MutationObserver((mutations) => {
+                            removeGTMIframes();
+                        });
+                        
+                        observer.observe(document.documentElement, {
+                            childList: true,
+                            subtree: true
+                        });
+                    })();
+                    ''')
+                    
                     # Wait for page to be fully loaded
                     await page.wait_for_load_state('networkidle')
-                    
+
+                    await asyncio.sleep(2)
+   
                     # Run accessibility tests
                     result = await axe.run(page)
                     
@@ -54,7 +92,7 @@ async def process_url(url: str, browser, semaphore, axe: Axe, progress_bar) -> T
                 progress_bar.write(f"Failed to process {url} after {max_retries} retries: {e}")
                 return url, []
         finally:
-            progress_bar.update(1)  # Update progress bar after each URL
+            progress_bar.update(1) 
 
 async def process_urls(urls: List[str]) -> List[Tuple[str, List[Dict]]]:
     """Process all URLs with a global progress bar."""
