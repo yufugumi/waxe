@@ -1,4 +1,4 @@
-import { Page } from "@playwright/test";
+import { expect, Page } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import fs from "fs";
 import path from "path";
@@ -125,6 +125,24 @@ export async function fillStagingDetails(page: Page): Promise<void> {
   const password = process.env.VISITOR_PASSWORD || "";
   await page.getByRole("textbox", { name: "VISITOR PASSWORD" }).fill(password);
   await page.getByRole("button", { name: "Log in", exact: true }).click();
+}
+
+export async function processCreditCardPayment(page: Page) {
+  await page
+    .getByRole("textbox", { name: "Card Number:required" })
+    .fill("4111 1111 1111 1111");
+  await page
+    .getByRole("textbox", { name: "Name On Card:required" })
+    .fill("TEST");
+  await page.getByLabel("Expiry Date (MM)").press("ArrowDown");
+  await page.getByLabel("Expiry Date (MM)").press("Tab");
+  await page.getByLabel("Expiry Date (YY)").press("ArrowDown");
+  await page.getByLabel("Expiry Date (YY)").press("ArrowDown");
+  await page.getByLabel("Expiry Date (YY)").press("Tab");
+  await page.getByRole("textbox", { name: "CVC:*" }).fill("888");
+  await page.getByRole("button", { name: "Submit" }).press("Enter");
+  await expect(page).toHaveTitle(/Windcave | Payment Result Page/);
+  await page.getByRole("link", { name: "Next" }).press("Enter");
 }
 
 export async function fillPersonalDetails(

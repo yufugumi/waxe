@@ -365,7 +365,7 @@ jobs:
           npx playwright install-deps
 
       - name: Run Tutuki accessibility tests
-        run: npx playwright test propertySearch.spec.ts tepp.spec.ts
+        run: npx playwright test propertySearch.spec.ts tepp.spec.ts dogReg.spec.ts
 
       - name: Upload test results
         if: always()
