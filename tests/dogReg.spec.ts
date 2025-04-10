@@ -1,8 +1,4 @@
-import {
-  fillStagingDetails,
-  processCreditCardPayment,
-  runAccessibilityTest,
-} from "./helpers/helper";
+import { fillStagingDetails, runAccessibilityTest } from "./helpers/helper";
 import { test, expect } from "@playwright/test";
 
 test("Register your dog", async ({ page }) => {
@@ -93,7 +89,5 @@ test("Register your dog", async ({ page }) => {
     async () => {
       await page.getByRole("button", { name: "Pay now" }).click();
     },
-    // windcave
-    async () => processCreditCardPayment(page),
   ]);
 });
