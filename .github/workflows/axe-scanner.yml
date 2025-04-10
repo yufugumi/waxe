@@ -2,6 +2,7 @@ name: Monthly accessibility scans
 
 env:
   SCAN_TIMESTAMP: ${{ github.run_id }}-${{ github.run_number }}
+  VISITOR_PASSWORD: ${{ secrets.VISITOR_PASSWORD }}
 
 on:
   schedule:
@@ -317,6 +318,7 @@ jobs:
 
   tutuki-scan:
     runs-on: blacksmith-2vcpu-ubuntu-2204
+    environment: Test
     timeout-minutes: 60
     if: ${{ github.event.inputs.scan_filter == 'all' || github.event.inputs.scan_filter == 'tutuki' || github.event_name == 'schedule' }}
 
@@ -359,19 +361,18 @@ jobs:
           echo "Installing fresh Node.js dependencies"
           npm install @playwright/test
           npm install @axe-core/playwright
-          npm install csv-writer
           npx playwright install
           npx playwright install-deps
 
       - name: Run Tutuki accessibility tests
-        run: npx playwright test tutuki.spec.ts
+        run: npx playwright test propertySearch.spec.ts tepp.spec.ts
 
       - name: Upload test results
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: tutuki-accessibility-results
-          path: tutuki-accessibility-results/
+          path: reports/
           retention-days: 30
 
       - name: Commit Tutuki results
@@ -379,7 +380,7 @@ jobs:
           git pull
           git config --global user.name 'GitHub Actions'
           git config --global user.email 'actions@github.com'
-          git add tutuki-accessibility-results/
+          git add reports/
           git commit -m "New a11y report for Tutuki services" || echo "No changes to commit"
           git push
 
