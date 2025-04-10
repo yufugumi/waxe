@@ -128,17 +128,15 @@ export async function fillStagingDetails(page: Page): Promise<void> {
 }
 
 export async function processCreditCardPayment(page: Page) {
+  await page.locator('[autocomplete="cc-number"]').fill("4111 1111 1111 1111");
+  await page;
+  page.locator('[autocomplete="cc-name"]').fill("TEST");
   await page
-    .getByRole("textbox", { name: "Card Number:required" })
-    .fill("4111 1111 1111 1111");
+    .locator('[autocomplete="cc-exp-month"], [name="month"]')
+    .selectOption("01");
   await page
-    .getByRole("textbox", { name: "Name On Card:required" })
-    .fill("TEST");
-  await page.getByLabel("Expiry Date (MM)").press("ArrowDown");
-  await page.getByLabel("Expiry Date (MM)").press("Tab");
-  await page.getByLabel("Expiry Date (YY)").press("ArrowDown");
-  await page.getByLabel("Expiry Date (YY)").press("ArrowDown");
-  await page.getByLabel("Expiry Date (YY)").press("Tab");
+    .locator('[autocomplete="cc-exp-year"], [name="year"]')
+    .selectOption("30");
   await page.getByRole("textbox", { name: "CVC:*" }).fill("888");
   await page.getByRole("button", { name: "Submit" }).press("Enter");
   await expect(page).toHaveTitle(/Windcave | Payment Result Page/);
