@@ -523,7 +523,9 @@ https://www.wellington.govt.nz/have-your-say/public-inputs/public-notices/open/a
 https://www.wellington.govt.nz/have-your-say/public-inputs/public-notices/open/alcohol-notices/2025-03-thebluelady
 https://www.wellington.govt.nz/have-your-say/public-inputs/public-notices/open/alcohol-notices/2025-04-amuse
 https://www.wellington.govt.nz/have-your-say/public-inputs/public-notices/open/alcohol-notices/2025-04-karoritaphouse
+https://www.wellington.govt.nz/have-your-say/public-inputs/public-notices/open/alcohol-notices/2025-04-rosella
 https://www.wellington.govt.nz/have-your-say/public-inputs/public-notices/open/alcohol-notices/2025-03-thebottleotawa
+https://www.wellington.govt.nz/have-your-say/public-inputs/public-notices/open/alcohol-notices/2025-04-meditteraneanfoodswellington
 https://www.wellington.govt.nz/have-your-say/public-inputs/public-notices/open/alcohol-notices/2025-04-namdeatery
 https://www.wellington.govt.nz/have-your-say/public-inputs/public-notices/open/alcohol-notices/2025-03-thecrookeddagger
 https://www.wellington.govt.nz/have-your-say/public-inputs/public-notices/open/alcohol-notices/2025-04-witchinghourminiputt
@@ -5847,6 +5849,7 @@ https://www.wellington.govt.nz/your-council/projects/kilbirnie-park
 https://www.wellington.govt.nz/your-council/projects/lets-get-wellington-moving
 https://www.wellington.govt.nz/your-council/projects/lyall-bay-amenity-park-development
 https://www.wellington.govt.nz/your-council/projects/tawa-intersection-improvements
+https://www.wellington.govt.nz/your-council/projects/massey-road-seawall-renewal
 https://www.wellington.govt.nz/your-council/projects/matai-moana-reserve
 https://www.wellington.govt.nz/your-council/projects/moa-point-sludge-minimisation-facility
 https://www.wellington.govt.nz/your-council/projects/oriental-bay-sea-wall-repairs
@@ -5914,6 +5917,7 @@ https://www.wellington.govt.nz/your-council/international-relations/internationa
 https://www.wellington.govt.nz/your-council/international-relations/international-city-partners/xiamen
 https://www.wellington.govt.nz/your-council/international-relations/international-city-partners/zhejiang
 https://www.wellington.govt.nz/your-council/emergency-management/emergency-management-in-wellington
+https://www.wellington.govt.nz/your-council/emergency-management/severe-weather-event
 https://www.wellington.govt.nz/your-council/emergency-management/hazards
 https://www.wellington.govt.nz/your-council/emergency-management/volunteering
 https://www.wellington.govt.nz/your-council/mayoral-forum/about-the-forum
